@@ -4,14 +4,9 @@ import airtrafficcontrol.app.exceptions.*;
 
 /**
  * Creates a military transport airplane. 
- * 
- *
- *@author Eva Gomes
- *@author Hugo Leal
- *@author Lucas Andrade
  */
-public class Transport extends MilitaryAirplane{
-	
+public class CivilCargoAirCraft extends CargoAircraft implements ICivil
+{
 	private static int numberOfMinutesToTakeOff = 10;
 	private static int numberOfMinutesToLand = 12;
 	private static int numberOfMinutesToSwitchCorridor = 5;
@@ -21,6 +16,7 @@ public class Transport extends MilitaryAirplane{
 	private static boolean newTakeOff = false;
 	private static boolean newLand = false;
 	private static boolean newSwitch = false;
+	private int passengersNum;
 	
 	/**
 	 * Creates a new airplane, with all its properties 
@@ -30,8 +26,10 @@ public class Transport extends MilitaryAirplane{
 	 * @param armament - whether it carries armament or not
 	 * @throws InvalidArgumentException 
 	 */
-	public Transport(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, boolean armament) throws InvalidArgumentException {
-		super(flightID, statingPosition, flightPlan, armament);
+	public CivilCargoAirCraft(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, int passengersNum) throws InvalidArgumentException {
+		super(flightID, statingPosition, flightPlan );
+		
+		this.passengersNum = passengersNum;
 		
 		if(flightID==null || statingPosition == null || flightPlan == null)
 			throw new InvalidArgumentException();
@@ -114,5 +112,11 @@ public class Transport extends MilitaryAirplane{
 	public int getNumberOfMinutesToSwitchCorridor()
 	{
 		return numberOfMinutesToSwitchCorridor;
+	}
+
+	@Override
+	public int getPassengersNumber()
+	{
+		return passengersNum;
 	}
 }

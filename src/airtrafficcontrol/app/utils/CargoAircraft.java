@@ -10,8 +10,8 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  *@author Lucas Andrade
  */
 
-public class CargoAircraft extends CivilAirplane{
-
+public class CargoAircraft extends Airship
+{
 	private static int numberOfMinutesToTakeOff = 13;
 	private static int numberOfMinutesToLand = 15;
 	private static int numberOfMinutesToSwitchCorridor = 7;

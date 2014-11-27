@@ -10,6 +10,10 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
 /**
+ * tem apenas plano de voo e corredor!
+ */
+
+/**
  * Abstract class whose subclasses' instances represent airships.
  *
  * @author Eva Gomes
@@ -17,21 +21,8 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  * @author Lucas Andrade
  *
  */
-public abstract class Airship
+public abstract class Airship extends AirCraft
 {
-	
-	// CAMPOS
-	
-	/**
-	 * This airship's flightID.
-	 */
-	private String flightID;
-	
-	/**
-	 * This airship's last know geographical positions.
-	 */
-	private LinkedList< GeographicalPosition > lastKnownGeograficalPositions;
-	
 	/**
 	 * The flight plan for this airship (take-off hour, air corridors and
 	 * landing hour).
@@ -57,13 +48,6 @@ public abstract class Airship
 	 */
 	public int numberOfMinutesToSwitchCorridor;
 	
-	/**
-	 * 
-	 */
-	private boolean positionWasUpdated = false;
-	
-	
-	
 	// CONSTRUCTOR
 	
 	/**
@@ -83,68 +67,23 @@ public abstract class Airship
 	 *             {@code flightPlan} are null.
 	 */
 	public Airship( String flightID, GeographicalPosition statingPosition,
-			FlightPlan flightPlan ) throws InvalidArgumentException {
-		
-		if( flightID == null || statingPosition == null || flightPlan == null )
+			FlightPlan flightPlan ) throws InvalidArgumentException
+	{
+		super( flightID, statingPosition );
+		if( flightPlan == null )
 			throw new InvalidArgumentException();
-		
-		this.flightID = flightID;
-		this.lastKnownGeograficalPositions = new LinkedList< GeographicalPosition >();
-		lastKnownGeograficalPositions.add( statingPosition );
 		this.flightPlan = flightPlan;
 	}
 	
-	
-	
-	// METODOS
-	
-	
-	/**
-	 * @return the ID of the plane
-	 */
-	public String getFlightID() {
-		return flightID;
-	}
-	
-	/**
-	 * @return the geographical position of the airplane
-	 */
-	public GeographicalPosition getGeographicPosition() {
-		return lastKnownGeograficalPositions.getFirst();
-	}
-	
-	/**
-	 * all the last known geographic positions of the aircraft
-	 * 
-	 * @return an array of objects of type object, where all the known
-	 *         geographic positions of the aircraft are saved as
-	 *         GeographicalPosition objects
-	 */
-	public Object[] getLastKnownGeographicPosition() {
-		return lastKnownGeograficalPositions.toArray();
-	}
-	
-	/**
-	 * @param newGeographicalPosition
-	 *            - updates the geographical position to a new one
-	 * @throws InvalidArgumentException
-	 */
-	public void updateGeographicPosition(
-			GeographicalPosition newGeographicalPosition )
-			throws InvalidArgumentException {
-		if( newGeographicalPosition == null )
-			throw new InvalidArgumentException();
-		
-		positionWasUpdated = true;
-		lastKnownGeograficalPositions.addFirst( newGeographicalPosition );
-	}
+
 	
 	/**
 	 * @return gets the corridor the airplane is planned to be in, at the time
 	 *         the method was called
 	 * @throws InvalidArgumentException
 	 */
-	public AltitudeCorridor getCurrentCorridor() {
+	public AltitudeCorridor getCurrentCorridor()
+	{
 		return flightPlan.getCurrentCorridor();
 	}
 	
@@ -157,18 +96,19 @@ public abstract class Airship
 	 * @throws InvalidArgumentException
 	 */
 	public void setNewArrivalHour( Calendar newArrivalHour )
-			throws InvalidArgumentException {
+			throws InvalidArgumentException
+	{
 		if( newArrivalHour == null )
 			throw new InvalidArgumentException();
 		
 		flightPlan.setNewArrivalHour( newArrivalHour, numberOfMinutesToLand );
-		
 	}
 	
 	/**
 	 * @return the flight plan of the airplane
 	 */
-	public FlightPlan getPlan() {
+	public FlightPlan getPlan()
+	{
 		return flightPlan;
 	}
 	
@@ -191,46 +131,17 @@ public abstract class Airship
 	/**
 	 * @return the date and hour the airplane is supposed to take off
 	 */
-	public Calendar getTakeOffDate() {
+	public Calendar getTakeOffDate()
+	{
 		return flightPlan.getTakeOffDate();
 	}
 	
 	/**
 	 * @return the date and hour the airplane is supposed to land
 	 */
-	public Calendar getLandingDate() {
+	public Calendar getLandingDate()
+	{
 		return flightPlan.getLandingDate();
-	}
-	
-	/**
-	 * @return true if the position was updated since the last time
-	 *         positionToString() was called
-	 * @return false if it was not
-	 */
-	public boolean wasPositionUpdated() {
-		return positionWasUpdated;
-	}
-	
-	/**
-	 * @return returns a string with the id, position, and observations about
-	 *         the airplane
-	 * @throws InvalidArgumentException
-	 */
-	public String positionToString() throws InvalidArgumentException {
-		StringBuilder builder = new StringBuilder();
-		GeographicalPosition pos = getGeographicPosition();
-		builder.append( flightID ).append( " " ).append( pos.getLatitude() )
-				.append( " " ).append( pos.getLongitude() ).append( " " )
-				.append( pos.getAltitude() ).append( " " )
-				.append( getObservations() );
-		return builder.toString();
-	}
-	
-	/**
-	 * sets positionWasUpdated to false
-	 */
-	protected void setToNotUpdated() {
-		positionWasUpdated = false;
 	}
 	
 	/**
@@ -244,8 +155,8 @@ public abstract class Airship
 	 *         corridor
 	 * @throws InvalidArgumentException
 	 */
-	private String verifyAltitude( AltitudeCorridor corridor ) {
-		
+	private String verifyAltitude( AltitudeCorridor corridor )
+	{
 		double altitude = getGeographicPosition().getAltitude();
 		
 		if( altitude > corridor.getUpperLimit()
@@ -259,7 +170,8 @@ public abstract class Airship
 	 * 
 	 * @return a string with information on the status of the plane
 	 */
-	private String verifyStatus() {
+	private String verifyStatus()
+	{
 		Calendar now = new GregorianCalendar();
 		
 		if( now.compareTo( getTakeOffDate() ) < 0 )
@@ -279,6 +191,10 @@ public abstract class Airship
 			return "The airplane has started its descent in order to land.";
 		else return "The airplane is switching corridors.";
 	}
+	
+// em Baixo:
+// para por na class fligth plan + os campos estaticos das classes derivadas para o seu construtor
+	
 	
 	/**
 	 * sets a new number of minutes for the take off of this class' airplanes.
@@ -336,58 +252,50 @@ public abstract class Airship
 	 */
 	public abstract int getNumberOfMinutesToSwitchCorridor();
 	
-	/**
-	 * returns if the airship is flying
-	 * 
-	 * @param airship
-	 * @return true if airship is flying else returns false
-	 */
-	public boolean isFlying( Airship airship ) {
-		double currentAltitude = airship.getGeographicPosition().getAltitude();
-		if( currentAltitude != 0 )
-			return true;
-		else return false;
-	}
-	
-	/**
-	 * Creates a list of the details of this airship in a string array.
-	 * 
-	 * @throws InvalidArgumentException
-	 */
-	public String[] toStringArray() {
 
-		GeographicalPosition pos = getGeographicPosition();
-		DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd,hh:mm" );
-		String[] details = new String[3];
-		details[0] = new StringBuilder( "FlightID: " )
-				.append( flightID )
-				.append( "\n\nTake-Off date: " )
-				.append(
-						dateFormat
-								.format( getPlan().getTakeOffDate().getTime() ) )
-				.append( "\nLanding date: " )
-				.append(
-						dateFormat
-								.format( getPlan().getLandingDate().getTime() ) )
-				.toString();
-		details[1] = new StringBuilder( "\n\nGeographic Position\nLatitude: " )
-				.append( (new Double( pos.getLatitude() )).toString() )
-				.append( "º\nLongitude: " )
-				.append( (new Double( pos.getLongitude() )).toString() )
-				.append( "º\nAltitude: " )
-				.append( (new Double( pos.getAltitude() )).toString() )
-				.append( "meters" ).toString();
-		try
-		{
-			details[2] = "\n\nObservations: " + getObservations();
-		}
-		catch( InvalidArgumentException e )
-		{
-			details[2] = "\n\nObservations: ERROR getting observations about the flight.";
-		}
-		return details;
-		
-	}
+//	TODO
+//	ver depois
+	
+//	/**
+//	 * Creates a list of the details of this airship in a string array.
+//	 * 
+//	 * @throws InvalidArgumentException
+//	 */
+//	public String[] toStringArray()
+//	{
+//
+//		GeographicalPosition pos = getGeographicPosition();
+//		DateFormat dateFormat = new SimpleDateFormat( "yyyy-MM-dd,hh:mm" );
+//		String[] details = new String[3];
+//		details[0] = new StringBuilder( "FlightID: " )
+//				.append( flightID )
+//				.append( "\n\nTake-Off date: " )
+//				.append(
+//						dateFormat
+//								.format( getPlan().getTakeOffDate().getTime() ) )
+//				.append( "\nLanding date: " )
+//				.append(
+//						dateFormat
+//								.format( getPlan().getLandingDate().getTime() ) )
+//				.toString();
+//		details[1] = new StringBuilder( "\n\nGeographic Position\nLatitude: " )
+//				.append( (new Double( pos.getLatitude() )).toString() )
+//				.append( "º\nLongitude: " )
+//				.append( (new Double( pos.getLongitude() )).toString() )
+//				.append( "º\nAltitude: " )
+//				.append( (new Double( pos.getAltitude() )).toString() )
+//				.append( "meters" ).toString();
+//		try
+//		{
+//			details[2] = "\n\nObservations: " + getObservations();
+//		}
+//		catch( InvalidArgumentException e )
+//		{
+//			details[2] = "\n\nObservations: ERROR getting observations about the flight.";
+//		}
+//		return details;
+//		
+//	}
 	
 	
 	// /**

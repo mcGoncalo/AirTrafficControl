@@ -10,8 +10,8 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  *@author Hugo Leal
  *@author Lucas Andrade
  */
-public class Airliner extends CivilAirplane{
-	
+public class Airliner extends Airship implements ICivil
+{
 	private static int numberOfMinutesToTakeOff = 8;
 	private static int numberOfMinutesToLand = 10;
 	private static int numberOfMinutesToSwitchCorridor = 4;

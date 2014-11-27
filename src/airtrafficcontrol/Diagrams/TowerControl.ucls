@@ -12,7 +12,7 @@
   </class>  
   <class id="2" language="java" name="airtrafficcontrol.app.utils.ReportGenerator" project="AirTraffic" 
     file="/AirTraffic/src/airtrafficcontrol/app/utils/ReportGenerator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="325" y="38"/>    
+    <position height="-1" width="-1" x="313" y="25"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -21,7 +21,7 @@
   </class>  
   <class id="3" language="java" name="airtrafficcontrol.app.utils.AltitudeComparator" project="AirTraffic" 
     file="/AirTraffic/src/airtrafficcontrol/app/utils/AltitudeComparator.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="118" y="260"/>    
+    <position height="-1" width="-1" x="249" y="372"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -40,7 +40,7 @@
   </class>  
   <class id="5" language="java" name="airtrafficcontrol.app.utils.Database" project="AirTraffic" 
     file="/AirTraffic/src/airtrafficcontrol/app/utils/Database.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="969" y="0"/>    
+    <position height="-1" width="-1" x="948" y="26"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
