@@ -11,7 +11,7 @@
     </display>  
   </class>  
   <class id="2" language="java" name="airtrafficcontrol.app.utils.CargoAircraft" project="AirTraffic" 
-    file="/AirTraffic/src/airtrafficcontrol/app/utils/CargoAircraft.java" binary="false" corner="BOTTOM_RIGHT">    
+    file="/AirTraffic/src/airtrafficcontrol/hangar/CargoAircraft.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="997" y="1280"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -65,10 +65,6 @@
     </display>  
   </interface>  
   <generalization id="8">    
-    <end type="SOURCE" refId="1"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <generalization id="9">    
     <end type="SOURCE" refId="3"/>    
     <end type="TARGET" refId="4"/>  
   </generalization>  

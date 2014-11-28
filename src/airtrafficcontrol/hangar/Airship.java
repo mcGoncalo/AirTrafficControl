@@ -1,4 +1,4 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
 
 
 import java.text.DateFormat;
@@ -6,6 +6,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.LinkedList;
+
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 

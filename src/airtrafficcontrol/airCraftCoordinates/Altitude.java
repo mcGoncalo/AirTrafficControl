@@ -1,14 +1,10 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.airCraftCoordinates;
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
  * This class represents an Altitude value.
- *@author Eva Gomes
- *@author Hugo Leal
- *@author Lucas Andrade
- *
- * */
+ */
 public class Altitude extends AGeographicalCoordinate
 {
 	private static final double MIN_ALTITUDE = 0;
@@ -17,7 +13,7 @@ public class Altitude extends AGeographicalCoordinate
 	 * Constructs a value of altitude
 	 * @param alt altitude value
 	 */
-	public Altitude( double altitude )throws InvalidArgumentException
+	public Altitude( double altitude ) throws InvalidArgumentException
 	{
 		super( altitude, MIN_ALTITUDE );
 	}

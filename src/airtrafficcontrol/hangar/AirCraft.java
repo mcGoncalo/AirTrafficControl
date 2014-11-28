@@ -1,7 +1,8 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
 
 import java.util.LinkedList;
 
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**

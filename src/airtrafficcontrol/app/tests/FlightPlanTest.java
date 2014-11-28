@@ -9,10 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.AirCorridorInTime;
-import airtrafficcontrol.app.utils.AltitudeCorridor;
-import airtrafficcontrol.app.utils.FlightPlan;
 
 public class FlightPlanTest {
 

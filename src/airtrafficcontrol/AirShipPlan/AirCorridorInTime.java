@@ -1,8 +1,10 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.AirShipPlan;
 
 
 import java.util.Calendar;
+
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
+import airtrafficcontrol.hangar.Airship;
 
 
 /**

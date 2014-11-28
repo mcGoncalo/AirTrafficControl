@@ -2,12 +2,13 @@ package airtrafficcontrol.app.deprecated;
 
 
 import java.util.Scanner;
+
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.appforconsole.AirTrafficControlAppForConsole;
 import airtrafficcontrol.app.menuoptions.Option;
-import airtrafficcontrol.app.utils.Airliner;
-import airtrafficcontrol.app.utils.Airship;
-import airtrafficcontrol.app.utils.Database;
-import airtrafficcontrol.app.utils.GeographicalPosition;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.towerControl.Database;
 
 
 /**

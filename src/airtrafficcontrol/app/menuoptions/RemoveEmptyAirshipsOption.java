@@ -2,12 +2,13 @@ package airtrafficcontrol.app.menuoptions;
 
 
 import java.util.Scanner;
+
 import airtrafficcontrol.app.AirTrafficControlAppToolbox;
 import airtrafficcontrol.app.appforconsole.AirTrafficControlAppForConsole;
 import airtrafficcontrol.app.appforconsole.ConsoleDataToolbox;
 import airtrafficcontrol.app.exceptions.DatabaseNotFoundException;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.Database;
+import airtrafficcontrol.towerControl.Database;
 
 
 /**

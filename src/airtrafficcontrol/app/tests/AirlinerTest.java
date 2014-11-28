@@ -8,12 +8,12 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.Airliner;
-import airtrafficcontrol.app.utils.FlightPlan;
-import airtrafficcontrol.app.utils.GeographicalPosition;
-import airtrafficcontrol.app.utils.ReadListOfFlights;
-import airtrafficcontrol.app.utils.ReportGenerator;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.towerControl.ReadListOfFlights;
+import airtrafficcontrol.towerControl.ReportGenerator;
 
 public class AirlinerTest {
 	

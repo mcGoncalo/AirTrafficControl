@@ -1,4 +1,6 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**

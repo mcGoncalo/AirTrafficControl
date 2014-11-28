@@ -10,17 +10,17 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Airliner;
-import airtrafficcontrol.app.utils.Airship;
-import airtrafficcontrol.app.utils.AltitudeCorridor;
-import airtrafficcontrol.app.utils.Database;
-import airtrafficcontrol.app.utils.FlightPlan;
-import airtrafficcontrol.app.utils.GeographicalPosition;
-import airtrafficcontrol.app.utils.PrivateJet;
-import airtrafficcontrol.app.utils.ReadListOfFlights;
 import airtrafficcontrol.app.utils.Transport;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.PrivateJet;
+import airtrafficcontrol.towerControl.Database;
+import airtrafficcontrol.towerControl.ReadListOfFlights;
 
 public class ReadListOfFlightsTest {
 
@@ -45,11 +45,11 @@ public class ReadListOfFlightsTest {
 	public void shouldHaveTheRightTypeOfAirplanes()
 	{
 		assertTrue(data.get("xptofligth01") instanceof airtrafficcontrol.app.utils.Transport);
-		assertTrue(data.get("xptofligth02") instanceof airtrafficcontrol.app.utils.Airliner);
-		assertTrue(data.get("xptofligth03") instanceof airtrafficcontrol.app.utils.Airliner);
-		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.app.utils.PrivateJet);
-		assertTrue(data.get("xptofligth05") instanceof airtrafficcontrol.app.utils.CargoAircraft);
-		assertTrue(data.get("xptofligth06") instanceof airtrafficcontrol.app.utils.CargoAircraft);
+		assertTrue(data.get("xptofligth02") instanceof airtrafficcontrol.hangar.Airliner);
+		assertTrue(data.get("xptofligth03") instanceof airtrafficcontrol.hangar.Airliner);
+		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.hangar.PrivateJet);
+		assertTrue(data.get("xptofligth05") instanceof airtrafficcontrol.hangar.CargoAircraft);
+		assertTrue(data.get("xptofligth06") instanceof airtrafficcontrol.hangar.CargoAircraft);
 	}
 	
 	@Test

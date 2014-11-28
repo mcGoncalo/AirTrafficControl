@@ -1,8 +1,8 @@
 package airtrafficcontrol.app;
 
 
-import airtrafficcontrol.app.utils.Database;
-import airtrafficcontrol.app.utils.ReportGenerator;
+import airtrafficcontrol.towerControl.Database;
+import airtrafficcontrol.towerControl.ReportGenerator;
 
 
 /**
@@ -47,9 +47,9 @@ public class AirTrafficControlAppToolbox
 	 * <p>
 	 * This instance provides:
 	 * <ul>
-	 * <li>an empty {@link airtrafficcontrol.app.utils.Database flights'
+	 * <li>an empty {@link airtrafficcontrol.towerControl.Database flights'
 	 * database}</li>
-	 * <li>a {@link airtrafficcontrol.app.utils.ReportGenerator reports
+	 * <li>a {@link airtrafficcontrol.towerControl.ReportGenerator reports
 	 * generator}.
 	 * </ul>
 	 * for the app.

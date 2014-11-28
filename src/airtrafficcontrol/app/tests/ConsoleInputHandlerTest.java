@@ -2,17 +2,20 @@ package airtrafficcontrol.app.tests;
 
 
 import static org.junit.Assert.*;
+
 import java.util.GregorianCalendar;
+
 import org.junit.Test;
+
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.appforconsole.ConsoleInputHandler;
 import airtrafficcontrol.app.exceptions.DatabaseNotFoundException;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Airliner;
-import airtrafficcontrol.app.utils.Airship;
-import airtrafficcontrol.app.utils.Database;
-import airtrafficcontrol.app.utils.FlightPlan;
-import airtrafficcontrol.app.utils.GeographicalPosition;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.towerControl.Database;
 
 
 

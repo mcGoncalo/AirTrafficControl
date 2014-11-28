@@ -1,20 +1,17 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
 
-import airtrafficcontrol.app.exceptions.InvalidArgumentException;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
+import airtrafficcontrol.app.exceptions.*;
 
 /**
- * Creates an airliner
- * 
- *
- *@author Eva Gomes
- *@author Hugo Leal
- *@author Lucas Andrade
+ * Creates a military transport airplane. 
  */
-public class Airliner extends Airship implements ICivil
+public class CivilCargoAirCraft extends CargoAircraft implements ICivil
 {
-	private static int numberOfMinutesToTakeOff = 8;
-	private static int numberOfMinutesToLand = 10;
-	private static int numberOfMinutesToSwitchCorridor = 4;
+	private static int numberOfMinutesToTakeOff = 10;
+	private static int numberOfMinutesToLand = 12;
+	private static int numberOfMinutesToSwitchCorridor = 5;
 	private static int newnumberOfMinutesToTakeOff;
 	private static int newnumberOfMinutesToLand;
 	private static int newnumberOfMinutesToSwitchCorridor;
@@ -23,10 +20,21 @@ public class Airliner extends Airship implements ICivil
 	private static boolean newSwitch = false;
 	private int passengersNum;
 	
-	public Airliner(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, int passengers) throws InvalidArgumentException {
-		super(flightID, statingPosition, flightPlan);
+	/**
+	 * Creates a new airplane, with all its properties 
+	 * @param flightID - the id of the flight
+	 * @param statingPosition - the take off coordinates
+	 * @param flightPlan - the plan of the flight
+	 * @param armament - whether it carries armament or not
+	 * @throws InvalidArgumentException 
+	 */
+	public CivilCargoAirCraft(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, int passengersNum) throws InvalidArgumentException {
+		super(flightID, statingPosition, flightPlan );
 		
-		passengersNum = passengers;
+		this.passengersNum = passengersNum;
+		
+		if(flightID==null || statingPosition == null || flightPlan == null)
+			throw new InvalidArgumentException();
 		
 		if (newTakeOff)
 			numberOfMinutesToTakeOff = newnumberOfMinutesToTakeOff;
@@ -34,22 +42,8 @@ public class Airliner extends Airship implements ICivil
 			numberOfMinutesToLand = newnumberOfMinutesToLand;
 		if (newSwitch)
 			numberOfMinutesToSwitchCorridor = newnumberOfMinutesToSwitchCorridor;
-	}
-
-	/**
-	 * @return the number of passengers in the airplane
-	 */
-	public int getPassengersNumber()
-	{
-		return passengersNum;
-	}
+		
 	
-	/**
-	 * sets the number of passengers to 0
-	 */
-	protected void removePassengers()
-	{
-		passengersNum = 0;
 	}
 	
 	/**
@@ -58,11 +52,10 @@ public class Airliner extends Airship implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to take off
 	 */
-	public void setNumberOfMinutesToTakeOff(int newTime) throws InvalidArgumentException
-	{			
+	public void setNumberOfMinutesToTakeOff(int newTime)throws InvalidArgumentException
+	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
-		
 		numberOfMinutesToTakeOff = newTime;
 		newnumberOfMinutesToTakeOff = newTime;
 		newTakeOff = true;
@@ -74,11 +67,10 @@ public class Airliner extends Airship implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to land
 	 */
-	public void setNumberOfMinutesToLand(int newTime) throws InvalidArgumentException
+	public void setNumberOfMinutesToLand(int newTime)throws InvalidArgumentException
 	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
-		
 		numberOfMinutesToLand = newTime;
 		newnumberOfMinutesToLand = newTime;
 		newLand = true;
@@ -90,14 +82,14 @@ public class Airliner extends Airship implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to switch lanes
 	 */
-	public void setNumberOfMinutesToSwitchCorridor(int newTime) throws InvalidArgumentException
+	public void setNumberOfMinutesToSwitchCorridor(int newTime)throws InvalidArgumentException
 	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
-		
 		numberOfMinutesToSwitchCorridor = newTime;
 		newnumberOfMinutesToSwitchCorridor = newTime;
 		newSwitch = true;
+		
 	}
 	
 	/**
@@ -123,17 +115,10 @@ public class Airliner extends Airship implements ICivil
 	{
 		return numberOfMinutesToSwitchCorridor;
 	}
-	
-	/**
-	 * Verifies if the airliner is with 0 passengers
-	 * @param airliner
-	 * @return true if the airliner has 0 passengers else returns false
-	 */
-	public boolean isEmpty(Airliner airliner)
+
+	@Override
+	public int getPassengersNumber()
 	{
-		if(airliner.getPassengersNumber() == 0)
-			return true;
-		else 
-			return false;
+		return passengersNum;
 	}
 }

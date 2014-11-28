@@ -1,4 +1,4 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.towerControl;
 
 
 import java.io.BufferedReader;
@@ -9,8 +9,17 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
+
+import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.CargoAircraft;
+import airtrafficcontrol.hangar.PrivateJet;
 
 
 /**

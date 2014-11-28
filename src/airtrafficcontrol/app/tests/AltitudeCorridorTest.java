@@ -2,10 +2,12 @@ package airtrafficcontrol.app.tests;
 
 
 import static org.junit.Assert.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.AltitudeCorridor;
 
 
 /**

@@ -3,6 +3,7 @@ package airtrafficcontrol.app.deprecated;
 
 import airtrafficcontrol.app.exceptions.InvalidOptionNumberException;
 import airtrafficcontrol.app.utils.*;
+import airtrafficcontrol.towerControl.Database;
 
 
 /**

@@ -1,47 +1,28 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
 
-import airtrafficcontrol.app.exceptions.*;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
+import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
- * Creates a military transport airplane. 
+ * Creates an airliner
  */
-public class CivilCargoAirCraft extends CargoAircraft implements ICivil
+public class PrivateJet extends Airliner
 {
-	private static int numberOfMinutesToTakeOff = 10;
-	private static int numberOfMinutesToLand = 12;
-	private static int numberOfMinutesToSwitchCorridor = 5;
+	private static int numberOfMinutesToTakeOff = 9;
+	private static int numberOfMinutesToLand = 9;
+	private static int numberOfMinutesToSwitchCorridor = 6;
 	private static int newnumberOfMinutesToTakeOff;
 	private static int newnumberOfMinutesToLand;
 	private static int newnumberOfMinutesToSwitchCorridor;
 	private static boolean newTakeOff = false;
 	private static boolean newLand = false;
 	private static boolean newSwitch = false;
-	private int passengersNum;
 	
-	/**
-	 * Creates a new airplane, with all its properties 
-	 * @param flightID - the id of the flight
-	 * @param statingPosition - the take off coordinates
-	 * @param flightPlan - the plan of the flight
-	 * @param armament - whether it carries armament or not
-	 * @throws InvalidArgumentException 
-	 */
-	public CivilCargoAirCraft(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, int passengersNum) throws InvalidArgumentException {
-		super(flightID, statingPosition, flightPlan );
+	public PrivateJet(String flightID, GeographicalPosition statingPosition,
+			FlightPlan flightPlan, int passengers) throws InvalidArgumentException {
+		super(flightID, statingPosition, flightPlan, passengers);
 		
-		this.passengersNum = passengersNum;
-		
-		if(flightID==null || statingPosition == null || flightPlan == null)
-			throw new InvalidArgumentException();
-		
-		if (newTakeOff)
-			numberOfMinutesToTakeOff = newnumberOfMinutesToTakeOff;
-		if (newLand)
-			numberOfMinutesToLand = newnumberOfMinutesToLand;
-		if (newSwitch)
-			numberOfMinutesToSwitchCorridor = newnumberOfMinutesToSwitchCorridor;
-		
-	
 	}
 	
 	/**
@@ -50,10 +31,11 @@ public class CivilCargoAirCraft extends CargoAircraft implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to take off
 	 */
-	public void setNumberOfMinutesToTakeOff(int newTime)throws InvalidArgumentException
+	public void setNumberOfMinutesToTakeOff(int newTime) throws InvalidArgumentException
 	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
+		
 		numberOfMinutesToTakeOff = newTime;
 		newnumberOfMinutesToTakeOff = newTime;
 		newTakeOff = true;
@@ -65,10 +47,11 @@ public class CivilCargoAirCraft extends CargoAircraft implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to land
 	 */
-	public void setNumberOfMinutesToLand(int newTime)throws InvalidArgumentException
+	public void setNumberOfMinutesToLand(int newTime) throws InvalidArgumentException
 	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
+		
 		numberOfMinutesToLand = newTime;
 		newnumberOfMinutesToLand = newTime;
 		newLand = true;
@@ -80,14 +63,14 @@ public class CivilCargoAirCraft extends CargoAircraft implements ICivil
 	 * and all that will be constructed in the future
 	 * @param newTime - the new number of minutes this class of airplane needs to switch lanes
 	 */
-	public void setNumberOfMinutesToSwitchCorridor(int newTime)throws InvalidArgumentException
+	public void setNumberOfMinutesToSwitchCorridor(int newTime) throws InvalidArgumentException
 	{
 		if (newTime == 0)
 			throw new InvalidArgumentException();
+		
 		numberOfMinutesToSwitchCorridor = newTime;
 		newnumberOfMinutesToSwitchCorridor = newTime;
 		newSwitch = true;
-		
 	}
 	
 	/**
@@ -114,9 +97,4 @@ public class CivilCargoAirCraft extends CargoAircraft implements ICivil
 		return numberOfMinutesToSwitchCorridor;
 	}
 
-	@Override
-	public int getPassengersNumber()
-	{
-		return passengersNum;
-	}
 }

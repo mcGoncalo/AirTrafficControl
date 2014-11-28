@@ -1,4 +1,4 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.airCraftCoordinates;
 
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;

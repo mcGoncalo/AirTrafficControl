@@ -8,14 +8,14 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.AirCorridorInTime;
-import airtrafficcontrol.app.utils.Airliner;
-import airtrafficcontrol.app.utils.AltitudeCorridor;
-import airtrafficcontrol.app.utils.FlightPlan;
-import airtrafficcontrol.app.utils.GeographicalPosition;
-import airtrafficcontrol.app.utils.ReadListOfFlights;
 import airtrafficcontrol.app.utils.Transport;
+import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.towerControl.ReadListOfFlights;
 
 public class AirshipTest_UsingTransportInstance {
 

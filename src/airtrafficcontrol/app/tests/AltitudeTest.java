@@ -5,8 +5,8 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.airCraftCoordinates.Altitude;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.Altitude;
 
 public class AltitudeTest {
 	

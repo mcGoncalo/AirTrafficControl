@@ -1,4 +1,4 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.towerControl;
 
 
 import java.io.BufferedReader;
@@ -6,6 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.StringTokenizer;
+
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
 

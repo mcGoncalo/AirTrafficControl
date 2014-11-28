@@ -1,4 +1,4 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.airCraftCoordinates;
 
 
 /**
@@ -30,25 +30,23 @@ public class GeographicalPosition
 	/**
 	 * Constructs an instance of {@link GeographicalPosition} with latitude {@code lat}, longitude {@code lon} and altitude {@code alt}.
 	 * 
-	 * @param lat
+	 * @param latitude
 	 *            latitude
 	 * @param lon
 	 *            longitude
 	 * @param alt
 	 *            altitude
 	 */
-	public GeographicalPosition( Latitude lat, Longitude lon, Altitude alt )
+	public GeographicalPosition( Latitude latitude, Longitude longitude, Altitude altitude )
 	{
-		latitude = lat;
-		longitude = lon;
-		altitude = alt;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.altitude = altitude;
 	}
 	
 	
 	
 	/**
-	 * Gets the longitude value
-	 * 
 	 * @return longitude value
 	 */
 	public double getLongitude()
@@ -57,8 +55,6 @@ public class GeographicalPosition
 	}
 	
 	/**
-	 * Gets the latitude value
-	 * 
 	 * @return value of latitude
 	 */
 	public double getLatitude()
@@ -67,8 +63,6 @@ public class GeographicalPosition
 	}
 	
 	/**
-	 * Gets the altitude value
-	 * 
 	 * @return value of altitude
 	 */
 	public double getAltitude()

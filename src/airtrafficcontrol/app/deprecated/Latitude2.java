@@ -1,8 +1,8 @@
 package airtrafficcontrol.app.deprecated;
 
 
+import airtrafficcontrol.airCraftCoordinates.Latitude;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.Latitude;
 
 
 /**

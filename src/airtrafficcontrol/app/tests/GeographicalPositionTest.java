@@ -5,11 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.airCraftCoordinates.Altitude;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
+import airtrafficcontrol.airCraftCoordinates.Latitude;
+import airtrafficcontrol.airCraftCoordinates.Longitude;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.Altitude;
-import airtrafficcontrol.app.utils.GeographicalPosition;
-import airtrafficcontrol.app.utils.Latitude;
-import airtrafficcontrol.app.utils.Longitude;
 
 public class GeographicalPositionTest {
 

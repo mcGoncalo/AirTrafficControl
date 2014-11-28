@@ -9,9 +9,9 @@ import java.util.GregorianCalendar;
 import org.junit.Before;
 import org.junit.Test;
 
+import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.AirCorridorInTime;
-import airtrafficcontrol.app.utils.AltitudeCorridor;
 
 public class AirCorridorInTimeTest {
 

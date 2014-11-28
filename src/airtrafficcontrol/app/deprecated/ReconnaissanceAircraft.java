@@ -1,8 +1,8 @@
 package airtrafficcontrol.app.deprecated;
 
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
-import airtrafficcontrol.app.utils.FlightPlan;
-import airtrafficcontrol.app.utils.GeographicalPosition;
 import airtrafficcontrol.app.utils.MilitaryAirplane;
 
 public class ReconnaissanceAircraft extends MilitaryAirplane{

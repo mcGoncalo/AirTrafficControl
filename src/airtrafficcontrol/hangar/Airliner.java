@@ -1,5 +1,7 @@
-package airtrafficcontrol.app.utils;
+package airtrafficcontrol.hangar;
 
+import airtrafficcontrol.AirShipPlan.FlightPlan;
+import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
@@ -10,22 +12,46 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  *@author Hugo Leal
  *@author Lucas Andrade
  */
-public class PrivateJet extends Airliner
+public class Airliner extends Airship implements ICivil
 {
-	private static int numberOfMinutesToTakeOff = 9;
-	private static int numberOfMinutesToLand = 9;
-	private static int numberOfMinutesToSwitchCorridor = 6;
+	private static int numberOfMinutesToTakeOff = 8;
+	private static int numberOfMinutesToLand = 10;
+	private static int numberOfMinutesToSwitchCorridor = 4;
 	private static int newnumberOfMinutesToTakeOff;
 	private static int newnumberOfMinutesToLand;
 	private static int newnumberOfMinutesToSwitchCorridor;
 	private static boolean newTakeOff = false;
 	private static boolean newLand = false;
 	private static boolean newSwitch = false;
+	private int passengersNum;
 	
-	public PrivateJet(String flightID, GeographicalPosition statingPosition,
-			FlightPlan flightPlan, int passengers) throws InvalidArgumentException {
-		super(flightID, statingPosition, flightPlan, passengers);
+	public Airliner(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan, int passengers) throws InvalidArgumentException {
+		super(flightID, statingPosition, flightPlan);
 		
+		passengersNum = passengers;
+		
+		if (newTakeOff)
+			numberOfMinutesToTakeOff = newnumberOfMinutesToTakeOff;
+		if (newLand)
+			numberOfMinutesToLand = newnumberOfMinutesToLand;
+		if (newSwitch)
+			numberOfMinutesToSwitchCorridor = newnumberOfMinutesToSwitchCorridor;
+	}
+
+	/**
+	 * @return the number of passengers in the airplane
+	 */
+	public int getPassengersNumber()
+	{
+		return passengersNum;
+	}
+	
+	/**
+	 * sets the number of passengers to 0
+	 */
+	protected void removePassengers()
+	{
+		passengersNum = 0;
 	}
 	
 	/**
@@ -35,7 +61,7 @@ public class PrivateJet extends Airliner
 	 * @param newTime - the new number of minutes this class of airplane needs to take off
 	 */
 	public void setNumberOfMinutesToTakeOff(int newTime) throws InvalidArgumentException
-	{
+	{			
 		if (newTime == 0)
 			throw new InvalidArgumentException();
 		
@@ -99,5 +125,17 @@ public class PrivateJet extends Airliner
 	{
 		return numberOfMinutesToSwitchCorridor;
 	}
-
+	
+	/**
+	 * Verifies if the airliner is with 0 passengers
+	 * @param airliner
+	 * @return true if the airliner has 0 passengers else returns false
+	 */
+	public boolean isEmpty(Airliner airliner)
+	{
+		if(airliner.getPassengersNumber() == 0)
+			return true;
+		else 
+			return false;
+	}
 }

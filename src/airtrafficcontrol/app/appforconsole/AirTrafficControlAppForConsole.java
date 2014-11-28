@@ -37,9 +37,9 @@ public class AirTrafficControlAppForConsole extends AirTrafficControlApp
 	 * <li>a {@link airtrafficcontrol.app.OptionsMenu menu} with the
 	 * {@link airtrafficcontrol.app.OptionsMenu#title title} {@code menuTitle}
 	 * and the {@link Option options} {@code options}
-	 * <li>an initially empty {@link airtrafficcontrol.app.utils.Database
+	 * <li>an initially empty {@link airtrafficcontrol.towerControl.Database
 	 * flights' database};</li>
-	 * <li>a {@link airtrafficcontrol.app.utils.ReportGenerator reports
+	 * <li>a {@link airtrafficcontrol.towerControl.ReportGenerator reports
 	 * generator};</li>
 	 * <li>a {@link ConsoleOutputFormatter console output formatter} that draws
 	 * a line filled with a sequence of {@code lengthOfSectionDelimiter}
