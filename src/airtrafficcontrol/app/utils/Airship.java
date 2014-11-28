@@ -38,24 +38,24 @@ public abstract class Airship
 	 */
 	private FlightPlan flightPlan;
 	
-	/**
-	 * The number of minutes the airship has to take-off and reach the first air
-	 * corridor.
-	 */
-	public int numberOfMinutesToTakeOff;
-	
-	/**
-	 * The number of minutes the airship has to land so that when he abandons
-	 * the current established air corridor, this occurrence will not be reported
-	 * as an error.
-	 */
-	public int numberOfMinutesToLand;
-	
-	/**
-	 * The number of minutes the airship has to switch from an established
-	 * altitude corridor to next one established.
-	 */
-	public int numberOfMinutesToSwitchCorridor;
+//	/**
+//	 * The number of minutes the airship has to take-off and reach the first air
+//	 * corridor.
+//	 */
+//	private int numberOfMinutesToTakeOff;
+//	
+//	/**
+//	 * The number of minutes the airship has to land so that when he abandons
+//	 * the current established air corridor, this occurrence will not be reported
+//	 * as an error.
+//	 */
+//	private int numberOfMinutesToLand;
+//	
+//	/**
+//	 * The number of minutes the airship has to switch from an established
+//	 * altitude corridor to next one established.
+//	 */
+//	private int numberOfMinutesToSwitchCorridor;
 	
 	/**
 	 * 
@@ -161,7 +161,7 @@ public abstract class Airship
 		if( newArrivalHour == null )
 			throw new InvalidArgumentException();
 		
-		flightPlan.setNewArrivalHour( newArrivalHour, numberOfMinutesToLand );
+		flightPlan.setNewArrivalHour(newArrivalHour);
 		
 	}
 	
@@ -280,61 +280,63 @@ public abstract class Airship
 		else return "The airplane is switching corridors.";
 	}
 	
-	/**
-	 * sets a new number of minutes for the take off of this class' airplanes.
-	 * this will affect all the airplanes of this type, that were already
-	 * constructed and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            take off
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToTakeOff( int newTime )
-			throws InvalidArgumentException;
+//	/**
+//	 * sets a new number of minutes for the take off of this class' airplanes.
+//	 * this will affect all the airplanes of this type, that were already
+//	 * constructed and all that will be constructed in the future
+//	 * 
+//	 * @param newTime
+//	 *            - the new number of minutes this class of airplane needs to
+//	 *            take off
+//	 * @throws InvalidArgumentException
+//	 */
+//	public abstract void setNumberOfMinutesToTakeOff( int newTime )
+//			throws InvalidArgumentException;
+//	
+//	/**
+//	 * sets a new number of minutes for the land of this class' airplanes. this
+//	 * will affect all the airplanes of this type, that were already constructed
+//	 * and all that will be constructed in the future
+//	 * 
+//	 * @param newTime
+//	 *            - the new number of minutes this class of airplane needs to
+//	 *            land
+//	 * @throws InvalidArgumentException
+//	 */
+//	public abstract void setNumberOfMinutesToLand( int newTime )
+//			throws InvalidArgumentException;
+//	
+//	/**
+//	 * sets a new number of minutes for switching lanes of this class'
+//	 * airplanes. this will affect all the airplanes of this type, that were
+//	 * already constructed and all that will be constructed in the future
+//	 * 
+//	 * @param newTime
+//	 *            - the new number of minutes this class of airplane needs to
+//	 *            switch lanes
+//	 * @throws InvalidArgumentException
+//	 */
+//	public abstract void setNumberOfMinutesToSwitchCorridor( int newTime )
+//			throws InvalidArgumentException;
+//	
+//	/**
+//	 * @return the number of minutes the airplanes of this class need to take
+//	 *         off
+//	 */
+//	public abstract int getNumberOfMinutesToTakeOff();
+//	
+//	/**
+//	 * @return - the number of minutes the airplanes of this class need to land
+//	 */
+//	public abstract int getNumberOfMinutesToLand();
+//	
+//	/**
+//	 * @return - the number of minutes the airplanes of this class need to
+//	 *         switch lanes
+//	 */
+//	public abstract int getNumberOfMinutesToSwitchCorridor();
 	
-	/**
-	 * sets a new number of minutes for the land of this class' airplanes. this
-	 * will affect all the airplanes of this type, that were already constructed
-	 * and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            land
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToLand( int newTime )
-			throws InvalidArgumentException;
 	
-	/**
-	 * sets a new number of minutes for switching lanes of this class'
-	 * airplanes. this will affect all the airplanes of this type, that were
-	 * already constructed and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            switch lanes
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToSwitchCorridor( int newTime )
-			throws InvalidArgumentException;
-	
-	/**
-	 * @return the number of minutes the airplanes of this class need to take
-	 *         off
-	 */
-	public abstract int getNumberOfMinutesToTakeOff();
-	
-	/**
-	 * @return - the number of minutes the airplanes of this class need to land
-	 */
-	public abstract int getNumberOfMinutesToLand();
-	
-	/**
-	 * @return - the number of minutes the airplanes of this class need to
-	 *         switch lanes
-	 */
-	public abstract int getNumberOfMinutesToSwitchCorridor();
 	
 	/**
 	 * returns if the airship is flying
