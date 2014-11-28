@@ -9,7 +9,7 @@ import java.util.Set;
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
 
 
@@ -261,8 +261,8 @@ public class Database
 		for( Map.Entry< String, Airship > entry : entries )
 		{
 			Airship airplane = entry.getValue();
-			if( (airplane instanceof Airliner)
-					&& ((Airliner)airplane).getPassengersNumber() == 0 )
+			if( (airplane instanceof AirPlane)
+					&& ((AirPlane)airplane).getPassengersNumber() == 0 )
 			{
 				toRemove.add( airplane.getFlightID() );
 				removedCount++ ;

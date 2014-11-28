@@ -9,18 +9,13 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
 /**
- * allows to build the plan of the flight
+ * Allows to build the flight plan
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
- *
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class FlightPlan
 {
-	
-	// CAMPOS
-	
 	/**
 	 * The departure hour.
 	 */
@@ -37,6 +32,33 @@ public class FlightPlan
 	private List< AirCorridorInTime > corridors;
 	
 	
+	/**
+	 * The number of minutes the airship has to take-off and reach the first air
+	 * corridor.
+	 */
+	private int numberOfMinutesToTakeOff;
+	
+	/**
+	 * The number of minutes the airship has to land so that when he abandons
+	 * the current established air corridor, this occurrence will not be reported
+	 * as an error.
+	 */
+	private int numberOfMinutesToLand;
+	
+	/**
+	 * The number of minutes the airship has to switch from an established
+	 * altitude corridor to next one established.
+	 */
+	private int numberOfMinutesToSwitchCorridor;
+	
+	private int newnumberOfMinutesToTakeOff;
+	private int newnumberOfMinutesToLand;
+	private int newnumberOfMinutesToSwitchCorridor;
+	private boolean newTakeOff = false;
+	private boolean newLand = false;
+	private boolean newSwitch = false;
+	
+	
 	// CONSTRUTOR
 	
 	
@@ -51,25 +73,34 @@ public class FlightPlan
 	 *            When the plane lands.
 	 * @throws InvalidArgumentException
 	 */
-	public FlightPlan( Calendar departureHour, Calendar arrivalHour )
-			throws InvalidArgumentException {
-		
+	public FlightPlan( Calendar departureHour, Calendar arrivalHour, int MinutesToTakeOff,
+			int MinutesToLand, int MinutesToSwitchCorridor  )
+			throws InvalidArgumentException
+	{		
 		if( departureHour == null || arrivalHour == null )
 			throw new InvalidArgumentException( "INVALID NULL HOUR!" );
 		if( departureHour.compareTo( arrivalHour ) >= 0 )
 			throw new InvalidArgumentException(
 					"INVALID HOURS, DEPARTURE MUST OCCUR BEFORE ARRIVAL!" );
-		
+		if( MinutesToTakeOff <= 0 || MinutesToLand <=0 || MinutesToSwitchCorridor <= 0)
+			throw new InvalidArgumentException(
+					"THE PARAMETERS OF THE FLIGTH MUST BE POSITIVE!" );
+				
 		corridors = new ArrayList<>();
 		this.departureHour = departureHour;
 		this.arrivalHour = arrivalHour;
+		this.numberOfMinutesToTakeOff = MinutesToTakeOff;
+		this.numberOfMinutesToLand = MinutesToLand;
+		this.numberOfMinutesToSwitchCorridor = MinutesToSwitchCorridor;
+		
+		if (newTakeOff)
+			numberOfMinutesToTakeOff = newnumberOfMinutesToTakeOff;
+		if (newLand)
+			numberOfMinutesToLand = newnumberOfMinutesToLand;
+		if (newSwitch)
+			numberOfMinutesToSwitchCorridor = newnumberOfMinutesToSwitchCorridor;
 	}
-	
-	
-	
-	// METODOS
-	
-	
+
 	/**
 	 * adds a new event to the list
 	 * 
@@ -78,7 +109,8 @@ public class FlightPlan
 	 * @throws InvalidArgumentException
 	 */
 	public boolean addEvent( AirCorridorInTime newEvent )
-			throws InvalidArgumentException {
+			throws InvalidArgumentException
+	{
 		if( newEvent == null )
 			throw new InvalidArgumentException();
 		
@@ -114,8 +146,8 @@ public class FlightPlan
 	 *         when the method was called
 	 * @throws InvalidArgumentException
 	 */
-	public AltitudeCorridor getCurrentCorridor() {
-		
+	public AltitudeCorridor getCurrentCorridor()
+	{		
 		Calendar now = new GregorianCalendar();
 		try
 		{
@@ -140,8 +172,8 @@ public class FlightPlan
 	 * @throws InvalidArgumentException
 	 */
 	public AltitudeCorridor getCorridorAtTime( Calendar time )
-			throws InvalidArgumentException {
-		
+			throws InvalidArgumentException
+	{		
 		if( time == null )
 			throw new InvalidArgumentException();
 		
@@ -173,8 +205,8 @@ public class FlightPlan
 	 *            last corridor it was in, until it lands
 	 * @throws InvalidArgumentException
 	 */
-	public void setNewArrivalHour( Calendar newArrivalHour,
-			int numberOfMinutesToLand ) throws InvalidArgumentException {
+	public void setNewArrivalHour( Calendar newArrivalHour) throws InvalidArgumentException
+	{
 		arrivalHour = newArrivalHour;
 		
 		if( newArrivalHour == null )
@@ -197,37 +229,130 @@ public class FlightPlan
 	/*
 	 * @return the list of all the AirCorridorInTime
 	 */
-	public List< AirCorridorInTime > getListOfCorridors() {
+	public List< AirCorridorInTime > getListOfCorridors()
+	{
 		return corridors;
 	}
 	
 	/**
 	 * @return the first event in the plan
 	 */
-	public AirCorridorInTime getFirstEvent() {
+	public AirCorridorInTime getFirstEvent()
+	{
 		return corridors.get( 0 );
 	}
 	
 	/**
 	 * @return the last event in the plan
 	 */
-	public AirCorridorInTime getLastEvent() {
+	public AirCorridorInTime getLastEvent()
+	{
 		return corridors.get( corridors.size() - 1 );
 	}
 	
 	/**
 	 * @return the date and hour of when is the take off supposed to happen
 	 */
-	public Calendar getTakeOffDate() {
+	public Calendar getTakeOffDate()
+	{
 		return departureHour;
 	}
 	
 	/**
 	 * @return the date and hour of when the airplane is supposed to happen
 	 */
-	public Calendar getLandingDate() {
+	public Calendar getLandingDate()
+	{
 		return arrivalHour;
 	}
+
+
+
+	
+	
+	/**
+	 * sets a new number of minutes for the take off of this class' airplanes.
+	 * this will affect all the airplanes of this type, that were already constructed
+	 * and all that will be constructed in the future
+	 * @param newTime - the new number of minutes this class of airplane needs to take off
+	 */
+	public void setNumberOfMinutesToTakeOff(int newTime) throws InvalidArgumentException
+	{
+		if (newTime == 0)
+			throw new InvalidArgumentException();
+		
+		numberOfMinutesToTakeOff = newTime;
+		newnumberOfMinutesToTakeOff = newTime;
+		newTakeOff = true;
+	}
+	
+	/**
+	 * sets a new number of minutes for the land of this class' airplanes.
+	 * this will affect all the airplanes of this type, that were already constructed
+	 * and all that will be constructed in the future
+	 * @param newTime - the new number of minutes this class of airplane needs to land
+	 */
+	public void setNumberOfMinutesToLand(int newTime) throws InvalidArgumentException
+	{
+		if (newTime == 0)
+			throw new InvalidArgumentException();
+		
+		numberOfMinutesToLand = newTime;
+		newnumberOfMinutesToLand = newTime;
+		newLand = true;
+	}
+	
+	/**
+	 * sets a new number of minutes for switching lanes of this class' airplanes.
+	 * this will affect all the airplanes of this type, that were already constructed
+	 * and all that will be constructed in the future
+	 * @param newTime - the new number of minutes this class of airplane needs to switch lanes
+	 */
+	public void setNumberOfMinutesToSwitchCorridor(int newTime) throws InvalidArgumentException
+	{
+		if (newTime == 0)
+			throw new InvalidArgumentException();
+		
+		numberOfMinutesToSwitchCorridor = newTime;
+		newnumberOfMinutesToSwitchCorridor = newTime;
+		newSwitch = true;
+	}
+	
+	/**
+	 * @return the number of minutes the airplanes of this class need to take off
+	 */
+	public int getNumberOfMinutesToTakeOff()
+	{
+		return numberOfMinutesToTakeOff;
+	}
+	
+	/**
+	 * @return - the number of minutes the airplanes of this class need to land
+	 */
+	public int getNumberOfMinutesToLand()
+	{
+		return numberOfMinutesToLand;
+	}
+	
+	/**
+	 * @return - the number of minutes the airplanes of this class need to switch lanes
+	 */
+	public int getNumberOfMinutesToSwitchCorridor()
+	{
+		return numberOfMinutesToSwitchCorridor;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// /**
 	// * adds an event in the middle of the flight

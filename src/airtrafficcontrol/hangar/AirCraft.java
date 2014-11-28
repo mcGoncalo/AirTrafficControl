@@ -6,41 +6,37 @@ import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
- * tem uma posiçao e ID
- * @author 
+ * Abstract class that represents an AirCraft with a position and a ID
+ *
+ * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public abstract class AirCraft
 {
 	/**
-	 * This airship's flightID.
+	 * This aircraft's flightID.
 	 */
 	private String flightID;
 	
 	/**
-	 * This airship's last know geographical positions.
+	 * This aircraft's last know geographical positions.
 	 */
 	private LinkedList< GeographicalPosition > lastKnownGeograficalPositions;
 	
 	/**
-	 * 
+	 * nao sabemos para que serve!!!
 	 */
 	private boolean positionWasUpdated = false;
 	
 	/**
-	 * Constructs an airplane with the ID {@code flightID}, the take off
-	 * coordinates {@code statingPostition} and the flight plan
-	 * {@code flightPlan}. Also creates a structure to save the airship's last
-	 * known geographical positions.
+	 * Constructs an airCraft with the ID {@code flightID}, geographical coordinates {@code statingPostition}.
+	 * Also creates a structure to save the airCraft's last known geographical positions.
 	 * 
 	 * @param flightID
 	 *            The flight's ID.
 	 * @param statingPosition
-	 *            The coordinates where the airship will take-off.
-	 * @param flightPlan
-	 *            The plan of the flight.
+	 *            The coordinates where the aircraft will take-off.
 	 * @throws InvalidArgumentException
-	 *             If {@code flightID}, {@code statingPosition} or
-	 *             {@code flightPlan} are null.
+	 *             If {@code flightID}, {@code statingPosition} are null.
 	 */
 	public AirCraft( String flightID, GeographicalPosition statingPosition ) throws InvalidArgumentException
 	{
@@ -61,20 +57,19 @@ public abstract class AirCraft
 	}
 	
 	/**
-	 * @return the geographical position of the airplane
+	 * @return the current geographical position of the airCraft
 	 */
-	public GeographicalPosition getGeographicPosition() {
+	public GeographicalPosition getGeographicPosition()
+	{
 		return lastKnownGeograficalPositions.getFirst();
 	}
 	
 	/**
-	 * all the last known geographic positions of the aircraft
-	 * 
-	 * @return an array of objects of type object, where all the known
-	 *         geographic positions of the aircraft are saved as
-	 *         GeographicalPosition objects
+	 * @return an object array, where all the known geographic positions of the aircraft are saved as
+	 * GeographicalPosition objects
 	 */
-	public Object[] getLastKnownGeographicPosition() {
+	public Object[] getLastKnownGeographicPosition()
+	{
 		return lastKnownGeograficalPositions.toArray();
 	}
 	
@@ -114,35 +109,30 @@ public abstract class AirCraft
 	}
 	
 	/**
-	 * returns if the airship is flying
-	 * 
-	 * @param airship
-	 * @return true if airship is flying else returns false
+	 * @param aircraft
+	 * @return true if aircraft is flying, false otherwise
 	 */
-	public boolean isFlying( Airship airship )
+	public boolean isFlying( AirCraft aircraft )
 	{
-		double currentAltitude = airship.getGeographicPosition().getAltitude();
+		double currentAltitude = aircraft.getGeographicPosition().getAltitude();
 		if( currentAltitude != 0 )
 			return true;
 		else return false;
 	}
-	
-//TODO
-//ver depois
-//	/**
-//	 * @return returns a string with the id, position, and observations about
-//	 *         the airplane
-//	 * @throws InvalidArgumentException
-//	 */
-//	public String positionToString() throws InvalidArgumentException
-//	{
-//		StringBuilder builder = new StringBuilder();
-//		GeographicalPosition pos = getGeographicPosition();
-//		builder.append( flightID ).append( " " ).append( pos.getLatitude() )
-//				.append( " " ).append( pos.getLongitude() ).append( " " )
-//				.append( pos.getAltitude() ).append( " " )
-//				.append( getObservations() );
-//		return builder.toString();
-//	}
+
+	/**
+	 * @return returns a string with the id, position, and observations about
+	 *         the airplane
+	 * @throws InvalidArgumentException
+	 */
+	public String positionToString() throws InvalidArgumentException
+	{
+		StringBuilder builder = new StringBuilder();
+		GeographicalPosition pos = getGeographicPosition();
+		builder.append( flightID ).append( " " ).append( pos.getLatitude() )
+				.append( " " ).append( pos.getLongitude() ).append( " " )
+				.append( pos.getAltitude() ).append( " " );
+		return builder.toString();
+	}
 	
 }

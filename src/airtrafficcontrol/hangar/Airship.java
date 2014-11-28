@@ -1,11 +1,8 @@
 package airtrafficcontrol.hangar;
 
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.LinkedList;
 
 import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
@@ -18,12 +15,11 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  */
 
 /**
- * Abstract class whose subclasses' instances represent airships.
+ * Abstract class that represents an Airship with fligthPlan and Corridor.
+ * Extends {@link AirCraft}
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
- *
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public abstract class Airship extends AirCraft
 {
@@ -33,32 +29,11 @@ public abstract class Airship extends AirCraft
 	 */
 	private FlightPlan flightPlan;
 	
-	/**
-	 * The number of minutes the airship has to take-off and reach the first air
-	 * corridor.
-	 */
-	public int numberOfMinutesToTakeOff;
-	
-	/**
-	 * The number of minutes the airship has to land so that when he abandons
-	 * the current established air corridor, this occurrence will not be reported
-	 * as an error.
-	 */
-	public int numberOfMinutesToLand;
-	
-	/**
-	 * The number of minutes the airship has to switch from an established
-	 * altitude corridor to next one established.
-	 */
-	public int numberOfMinutesToSwitchCorridor;
-	
+		
 	// CONSTRUCTOR
 	
 	/**
-	 * Constructs an airplane with the ID {@code flightID}, the take off
-	 * coordinates {@code statingPostition} and the flight plan
-	 * {@code flightPlan}. Also creates a structure to save the airship's last
-	 * known geographical positions.
+	 * Constructs an airplane with the flight plan {@code flightPlan}.
 	 * 
 	 * @param flightID
 	 *            The flight's ID.
@@ -78,8 +53,6 @@ public abstract class Airship extends AirCraft
 			throw new InvalidArgumentException();
 		this.flightPlan = flightPlan;
 	}
-	
-
 	
 	/**
 	 * @return gets the corridor the airplane is planned to be in, at the time
@@ -105,7 +78,7 @@ public abstract class Airship extends AirCraft
 		if( newArrivalHour == null )
 			throw new InvalidArgumentException();
 		
-		flightPlan.setNewArrivalHour( newArrivalHour, numberOfMinutesToLand );
+		flightPlan.setNewArrivalHour( newArrivalHour );
 	}
 	
 	/**
@@ -124,8 +97,8 @@ public abstract class Airship extends AirCraft
 	 * @return a string with information on the status of the airplane
 	 * @throws InvalidArgumentException
 	 */
-	public String getObservations() throws InvalidArgumentException {
-		
+	public String getObservations() throws InvalidArgumentException
+	{
 		AltitudeCorridor corridor = this.getCurrentCorridor();
 		if( corridor == null )
 			return verifyStatus();
@@ -195,67 +168,7 @@ public abstract class Airship extends AirCraft
 			return "The airplane has started its descent in order to land.";
 		else return "The airplane is switching corridors.";
 	}
-	
-// em Baixo:
-// para por na class fligth plan + os campos estaticos das classes derivadas para o seu construtor
-	
-	
-	/**
-	 * sets a new number of minutes for the take off of this class' airplanes.
-	 * this will affect all the airplanes of this type, that were already
-	 * constructed and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            take off
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToTakeOff( int newTime )
-			throws InvalidArgumentException;
-	
-	/**
-	 * sets a new number of minutes for the land of this class' airplanes. this
-	 * will affect all the airplanes of this type, that were already constructed
-	 * and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            land
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToLand( int newTime )
-			throws InvalidArgumentException;
-	
-	/**
-	 * sets a new number of minutes for switching lanes of this class'
-	 * airplanes. this will affect all the airplanes of this type, that were
-	 * already constructed and all that will be constructed in the future
-	 * 
-	 * @param newTime
-	 *            - the new number of minutes this class of airplane needs to
-	 *            switch lanes
-	 * @throws InvalidArgumentException
-	 */
-	public abstract void setNumberOfMinutesToSwitchCorridor( int newTime )
-			throws InvalidArgumentException;
-	
-	/**
-	 * @return the number of minutes the airplanes of this class need to take
-	 *         off
-	 */
-	public abstract int getNumberOfMinutesToTakeOff();
-	
-	/**
-	 * @return - the number of minutes the airplanes of this class need to land
-	 */
-	public abstract int getNumberOfMinutesToLand();
-	
-	/**
-	 * @return - the number of minutes the airplanes of this class need to
-	 *         switch lanes
-	 */
-	public abstract int getNumberOfMinutesToSwitchCorridor();
-	
+
 
 //	TODO
 //	ver depois
@@ -301,17 +214,4 @@ public abstract class Airship extends AirCraft
 //		
 //	}
 	
-	
-	// /**
-	// * adds an event in the middle of the flight
-	// * @param newEvent - the new event to be added
-	// * @return - true if the event was successfully added
-	// * @throws InvalidArgumentException
-	// */
-	// public boolean addMidFlightPlan(AirCorridorInTime newEvent) throws
-	// InvalidArgumentException
-	// {
-	// return flightPlan.addMidFlightPlan(newEvent,
-	// numberOfMinutesToSwitchCorridor);
-	// }
 }

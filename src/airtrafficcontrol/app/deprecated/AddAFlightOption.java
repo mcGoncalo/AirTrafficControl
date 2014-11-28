@@ -6,7 +6,7 @@ import java.util.Scanner;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.appforconsole.AirTrafficControlAppForConsole;
 import airtrafficcontrol.app.menuoptions.Option;
-import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.towerControl.Database;
 

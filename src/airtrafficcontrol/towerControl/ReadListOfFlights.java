@@ -1,5 +1,3 @@
-package airtrafficcontrol.towerControl;
-
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -10,16 +8,17 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
-import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
-import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.hangar.Airliner;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.CargoAircraft;
-import airtrafficcontrol.hangar.PrivateJet;
+import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.MilitarHelicopter;
+import airtrafficcontrol.hangar.MilitaryAirPlane;
+import airtrafficcontrol.hangar.OVNI;
 
 
 /**
@@ -33,39 +32,31 @@ import airtrafficcontrol.hangar.PrivateJet;
  */
 public class ReadListOfFlights
 {
-	
-	private static Airship airplane1;
-	private static Airship airplane2;
-	private static Airship airplane3;
-	private static Airship airplane4;
+	private static Airship airship1;
+	private static Airship airship2;
+	private static Airship airship3;
+	private static AirCraft airCraft4;
 	
 	static
 	{
 		try
 		{
-			airplane1 = new Airliner( "xpto01", new GeographicalPosition( 20,
-					130, 0 ),
+			airship1 = new CivilAirPlane( "xpto01", new GeographicalPosition( 20,130, 0 ),
 					new FlightPlan(
 							new GregorianCalendar( 2014, 11, 10, 00, 15 ),
-							new GregorianCalendar( 2014, 11, 10, 04, 15 ) ), 50 );
-			airplane2 = new PrivateJet( "xpto02", new GeographicalPosition( 30,
+							new GregorianCalendar( 2014, 11, 10, 04, 15 ) , 8, 10, 4), 50 );
+			airship2 = new MilitarHelicopter( "xpto02", new GeographicalPosition( 30,
 					30, 0 ),
 					new FlightPlan(
 							new GregorianCalendar( 2014, 11, 11, 00, 15 ),
-							new GregorianCalendar( 2014, 11, 11, 04, 15 ) ), 10 );
-			airplane3 = new CargoAircraft( "xpto03", new GeographicalPosition(
+							new GregorianCalendar( 2014, 11, 11, 04, 15 ),9 ,9, 6 ), true );
+			airship3 = new MilitaryAirPlane( "xpto03", new GeographicalPosition(
 					40, 30, 0 ), new FlightPlan( new GregorianCalendar( 2014,
 					11, 12, 00, 15 ), new GregorianCalendar( 2014, 11, 12, 04,
-					15 ) ) );
-			airplane4 = new Transport( "xpto04", new GeographicalPosition(
-					20.00, 130.00, 0.00 ), new FlightPlan(
-					new GregorianCalendar( 2014, 11, 13, 00, 15 ),
-					new GregorianCalendar( 2014, 11, 13, 04, 15 ) ), false );
+					15 ), 13, 15, 7 ) , false);
+			airCraft4 = new OVNI(  new GeographicalPosition(20.00, 130.00, 0.00 ) );
 		}
-		catch( InvalidArgumentException e )
-		{
-			airplane1 = airplane2 = airplane3 = airplane4 = null;
-		}
+		catch( InvalidArgumentException e ){}
 	}
 	
 	
@@ -139,12 +130,11 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airplane1.getNumberOfMinutesToTakeOff(),
-							airplane1.getNumberOfMinutesToLand(),
-							airplane1.getNumberOfMinutesToSwitchCorridor() );
+							airship1.getPlan().getNumberOfMinutesToTakeOff(),
+							airship1.getPlan().getNumberOfMinutesToLand(),
+							airship1.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
-					Airliner airliner = new Airliner( flightID, pos, plan,
-							passengers );
+					CivilAirPlane airliner = new CivilAirPlane( flightID, pos, plan, passengers );
 					database.addAirplane( airliner );
 					break;
 				
@@ -164,9 +154,9 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airplane2.getNumberOfMinutesToTakeOff(),
-							airplane2.getNumberOfMinutesToLand(),
-							airplane2.getNumberOfMinutesToSwitchCorridor() );
+							airCraft2.getPlan().getNumberOfMinutesToTakeOff(),
+							airCraft2.getPlan().getNumberOfMinutesToLand(),
+							airCraft2.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
 					PrivateJet jet = new PrivateJet( flightID, pos, plan,
 							passengers );
@@ -189,9 +179,9 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airplane3.getNumberOfMinutesToTakeOff(),
-							airplane3.getNumberOfMinutesToLand(),
-							airplane3.getNumberOfMinutesToSwitchCorridor() );
+							airCraft3.getPlan().getNumberOfMinutesToTakeOff(),
+							airCraft3.getPlan().getNumberOfMinutesToLand(),
+							airCraft3.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
 					CargoAircraft cargo = new CargoAircraft( flightID, pos,
 							plan );
@@ -214,9 +204,9 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airplane4.getNumberOfMinutesToTakeOff(),
-							airplane4.getNumberOfMinutesToLand(),
-							airplane4.getNumberOfMinutesToSwitchCorridor() );
+							airCraft4.getPlan().getNumberOfMinutesToTakeOff(),
+							airCraft4.getPlan().getNumberOfMinutesToLand(),
+							airCraft4.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
 					Transport t = new Transport( flightID, pos, plan,
 							(armament == 0) ? false : true );
@@ -323,7 +313,7 @@ public class ReadListOfFlights
 		if( takeOffDate == null || landingDate == null || tokenizer == null )
 			throw new InvalidArgumentException();
 		
-		FlightPlan plan = new FlightPlan( takeOffDate, landingDate );
+		FlightPlan plan = new FlightPlan( takeOffDate, landingDate, takeOff, land, switchCorridor);
 		
 		Calendar dateOld = createDefensiveCopyOfTheDate( takeOffDate );
 		

@@ -1,5 +1,7 @@
 package airtrafficcontrol.airCraftCoordinates;
 
+import airtrafficcontrol.app.exceptions.InvalidArgumentException;
+
 
 /**
  * Class whose instances represent geographical positions defined by a value of latitude, a value of longitude and
@@ -45,6 +47,24 @@ public class GeographicalPosition
 	}
 	
 	
+	/**
+	 * Constructs a GeographicalPosition with latitude, longitude and altitude
+	 * defined by lan, lon and alt
+	 * 
+	 * @param lat
+	 *            latitude value
+	 * @param lon
+	 *            longitude value
+	 * @param alt
+	 *            altitude value
+	 */
+	public GeographicalPosition( double lat, double lon, double alt )
+			throws InvalidArgumentException {
+		latitude = new Latitude( lat );
+		longitude = new Longitude( lon );
+		altitude = new Altitude( alt );
+	}
+	
 	
 	/**
 	 * @return longitude value
@@ -72,23 +92,7 @@ public class GeographicalPosition
 //	
 //	
 //	
-//	/**
-//	 * Constructs a GeographicalPosition with latitude, longitude and altitude
-//	 * defined by lan, lon and alt
-//	 * 
-//	 * @param lat
-//	 *            latitude value
-//	 * @param lon
-//	 *            longitude value
-//	 * @param alt
-//	 *            altitude value
-//	 */
-//	public GeographicalPosition( double lat, double lon, double alt )
-//			throws InvalidArgumentException {
-//		latitude = new Latitude( lat );
-//		longitude = new Longitude( lon );
-//		altitude = new Altitude( alt );
-//	}
+
 	
 //	/**
 //	 * Increments the value of the current {@link GeographicalPosition} with
