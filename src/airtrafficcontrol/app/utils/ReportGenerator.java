@@ -21,9 +21,9 @@ import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
  * Allows to emit various types of reports. These reports can be returned as an
  * array of strings, or written out to files
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+* @author Eva Gomes, Hugo Leal, Lucas Andrade
+ *  
+ * @author (revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class ReportGenerator
 {
