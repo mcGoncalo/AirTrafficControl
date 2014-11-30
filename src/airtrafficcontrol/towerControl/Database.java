@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
@@ -12,7 +13,6 @@ import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
 import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.ICivil;
 
 
@@ -34,9 +34,8 @@ import airtrafficcontrol.hangar.ICivil;
  * </ul>
  * </p>
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class Database
 {
@@ -125,30 +124,30 @@ public class Database
 	 * Adds an airplane to the database, if this does not contain
 	 * {@code airplane} yet.
 	 * 
-	 * @param airplane
+	 * @param aircraft
 	 *            The airplane to be added to this.
 	 * @return {@code true} if the airplane was successfully added;
 	 *         {@code false} if the airplane was not added.
 	 * @throws InvalidArgumentException
 	 * @throws InvalidFlightIDException
 	 */
-	public boolean addAirplane( Airship airplane )
+	public boolean addAirship( AirCraft aircraft )
 			throws InvalidFlightIDException, InvalidArgumentException {
 		
-		if( airplane == null )
+		if( aircraft == null )
 			throw new InvalidArgumentException();
 		
-		String id = airplane.getFlightID();
+		String id = aircraft.getFlightID();
 		if( id == null )
 			throw new InvalidFlightIDException();
 		
-		if( database.containsKey( airplane.getFlightID() ) )
+		if( database.containsKey( aircraft.getFlightID() ) )
 		{
 			return false;
 		}
 		else
 		{
-			database.put( airplane.getFlightID(), airplane );
+			database.put( aircraft.getFlightID(), aircraft );
 			return true;
 		}
 	}

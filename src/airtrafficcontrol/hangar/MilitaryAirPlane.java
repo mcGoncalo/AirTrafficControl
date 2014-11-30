@@ -4,6 +4,11 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+
+/**
+ * 
+ * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
 public class MilitaryAirPlane extends AirPlane implements IMilitary
 {
 	private boolean hasArmament;

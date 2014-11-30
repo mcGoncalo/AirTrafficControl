@@ -23,10 +23,9 @@ public abstract class AirCraft
 	private LinkedList< GeographicalPosition > lastKnownGeograficalPositions;
 	
 	/**
-	 * Sets the property positionWasUpdated of all the airplanes in the database, then to call 
-	 * the method setToNotUpdated() by airplane, this must be public
+	 * nao sabemos para que serve!!!
 	 */
-	public boolean positionWasUpdated = false;
+	private boolean positionWasUpdated = false;
 	
 	/**
 	 * Constructs an airCraft with the ID {@code flightID}, geographical coordinates {@code statingPostition}.

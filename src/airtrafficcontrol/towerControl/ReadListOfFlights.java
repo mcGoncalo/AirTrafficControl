@@ -1,3 +1,5 @@
+package airtrafficcontrol.towerControl;
+
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -8,6 +10,8 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.StringTokenizer;
 
+import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
+import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
@@ -16,6 +20,7 @@ import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.CivilHelicopter;
 import airtrafficcontrol.hangar.MilitarHelicopter;
 import airtrafficcontrol.hangar.MilitaryAirPlane;
 import airtrafficcontrol.hangar.OVNI;
@@ -25,17 +30,16 @@ import airtrafficcontrol.hangar.OVNI;
  * Class whose instances read a list of flights from a text file and create an
  * instance of {@link Database}.
  * 
- *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class ReadListOfFlights
 {
 	private static Airship airship1;
 	private static Airship airship2;
 	private static Airship airship3;
-	private static AirCraft airCraft4;
+	private static Airship airship4;
+	private static AirCraft airCraft1;
 	
 	static
 	{
@@ -54,7 +58,11 @@ public class ReadListOfFlights
 					40, 30, 0 ), new FlightPlan( new GregorianCalendar( 2014,
 					11, 12, 00, 15 ), new GregorianCalendar( 2014, 11, 12, 04,
 					15 ), 13, 15, 7 ) , false);
-			airCraft4 = new OVNI(  new GeographicalPosition(20.00, 130.00, 0.00 ) );
+			airship4 = new MilitaryAirPlane( "xpto04", new GeographicalPosition(
+					40, 30, 0 ), new FlightPlan( new GregorianCalendar( 2014,
+					11, 13, 00, 15 ), new GregorianCalendar( 2014, 11, 13, 04,
+					15 ), 13, 15, 7 ) , false);
+			airCraft1 = new OVNI(  new GeographicalPosition(20.00, 130.00, 0.00 ) );
 		}
 		catch( InvalidArgumentException e ){}
 	}
@@ -112,9 +120,11 @@ public class ReadListOfFlights
 			Calendar dateLanding;
 			FlightPlan plan;
 			
+			
+			//
 			switch( typeOfAirship )
 			{
-				case "a":
+				case "cap":					//civil Airplane
 					passengers = Integer.parseInt( tokenizer.nextToken() );
 					tokenizer.nextToken();
 					dateTakeOff = getDate( tokenizer.nextToken() );
@@ -135,10 +145,11 @@ public class ReadListOfFlights
 							airship1.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
 					CivilAirPlane airliner = new CivilAirPlane( flightID, pos, plan, passengers );
-					database.addAirplane( airliner );
+					database.addAirship( airliner );
 					break;
 				
-				case "j":
+					
+				case "ch":				//civil helicopter
 					passengers = Integer.parseInt( tokenizer.nextToken() );
 					tokenizer.nextToken();
 					dateTakeOff = getDate( tokenizer.nextToken() );
@@ -154,41 +165,16 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airCraft2.getPlan().getNumberOfMinutesToTakeOff(),
-							airCraft2.getPlan().getNumberOfMinutesToLand(),
-							airCraft2.getPlan().getNumberOfMinutesToSwitchCorridor() );
+							airship2.getPlan().getNumberOfMinutesToTakeOff(),
+							airship2.getPlan().getNumberOfMinutesToLand(),
+							airship2.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
-					PrivateJet jet = new PrivateJet( flightID, pos, plan,
-							passengers );
-					database.addAirplane( jet );
+					CivilHelicopter cHeli = new CivilHelicopter( flightID, pos, plan,	passengers );
+					database.addAirship( cHeli );
 					break;
 				
-				case "c":
-					tokenizer.nextToken();
-					tokenizer.nextToken();
-					dateTakeOff = getDate( tokenizer.nextToken() );
 					
-					latitude = Double.parseDouble( tokenizer.nextToken() );
-					longitude = Double.parseDouble( tokenizer.nextToken() );
-					
-					pos = new GeographicalPosition( latitude, longitude, 0 );
-					
-					dateLanding = getDate( tokenizer.nextToken() );
-					
-					tokenizer.nextToken();
-					tokenizer.nextToken();
-					
-					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airCraft3.getPlan().getNumberOfMinutesToTakeOff(),
-							airCraft3.getPlan().getNumberOfMinutesToLand(),
-							airCraft3.getPlan().getNumberOfMinutesToSwitchCorridor() );
-					
-					CargoAircraft cargo = new CargoAircraft( flightID, pos,
-							plan );
-					database.addAirplane( cargo );
-					break;
-				
-				case "t":
+				case "map":					// military Airplane
 					tokenizer.nextToken();
 					Integer armament = Integer.parseInt( tokenizer.nextToken() );
 					dateTakeOff = getDate( tokenizer.nextToken() );
@@ -204,13 +190,64 @@ public class ReadListOfFlights
 					tokenizer.nextToken();
 					
 					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
-							airCraft4.getPlan().getNumberOfMinutesToTakeOff(),
-							airCraft4.getPlan().getNumberOfMinutesToLand(),
-							airCraft4.getPlan().getNumberOfMinutesToSwitchCorridor() );
+							airship3.getPlan().getNumberOfMinutesToTakeOff(),
+							airship3.getPlan().getNumberOfMinutesToLand(),
+							airship3.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
-					Transport t = new Transport( flightID, pos, plan,
-							(armament == 0) ? false : true );
-					database.addAirplane( t );
+					MilitaryAirPlane cargo = new MilitaryAirPlane( flightID, pos, plan,(armament == 0) ? false : true );
+					database.addAirship( cargo );
+					break;
+				
+					
+				case "mh":                 //military helicopter
+					tokenizer.nextToken();
+					Integer armament1 = Integer.parseInt( tokenizer.nextToken() );
+					dateTakeOff = getDate( tokenizer.nextToken() );
+					
+					latitude = Double.parseDouble( tokenizer.nextToken() );
+					longitude = Double.parseDouble( tokenizer.nextToken() );
+					
+					pos = new GeographicalPosition( latitude, longitude, 0 );
+					
+					dateLanding = getDate( tokenizer.nextToken() );
+					
+					tokenizer.nextToken();
+					tokenizer.nextToken();
+					
+					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
+							airship4.getPlan().getNumberOfMinutesToTakeOff(),
+							airship4.getPlan().getNumberOfMinutesToLand(),
+							airship4.getPlan().getNumberOfMinutesToSwitchCorridor() );
+					
+					MilitarHelicopter t = new MilitarHelicopter( flightID, pos, plan,(armament1 == 0) ? false : true );
+					database.addAirship( t );
+					break;
+					
+					
+				case "ufo":                 //Unknown flight object
+					tokenizer.nextToken();
+					
+					latitude = Double.parseDouble( tokenizer.nextToken() );
+					longitude = Double.parseDouble( tokenizer.nextToken() );
+					
+					pos = new GeographicalPosition( latitude, longitude, 0 );
+					
+					dateLanding = getDate( tokenizer.nextToken() );
+					
+					tokenizer.nextToken();
+					tokenizer.nextToken();
+					
+					OVNI ovni = new OVNI(  pos );
+//							(armament == 0) ? false : true );
+					
+//					plan = getFlightPlan( dateTakeOff, dateLanding, tokenizer,
+//							airCraft1.getPlan().getNumberOfMinutesToTakeOff(),
+//							airCraft1.getPlan().getNumberOfMinutesToLand(),
+//							airCraft1.getPlan().getNumberOfMinutesToSwitchCorridor() );
+//					
+//					Transport t = new Transport( flightID, pos, plan,
+//							(armament == 0) ? false : true );
+					database.addAirship( ovni );
 					break;
 				
 				default:

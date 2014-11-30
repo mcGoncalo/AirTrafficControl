@@ -1,6 +1,4 @@
 package airtrafficcontrol.towerControl;
-
-
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,9 +23,8 @@ import airtrafficcontrol.hangar.Airship;
  * Allows to emit various types of reports. These reports can be returned as an
  * array of strings, or written out to files
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+* @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class ReportGenerator
 {
@@ -127,7 +124,7 @@ public class ReportGenerator
 			throw new InvalidArgumentException();
 		
 		Map< String, AirCraft > database = data.getDatabase();
-		ArrayList< AirCraft > airplanesOut = new ArrayList<>();
+		ArrayList< Airship > airplanesOut = new ArrayList<>();
 		
 		Set< String > idSet = database.keySet();
 		Iterator< String > iterator = idSet.iterator();
@@ -146,10 +143,10 @@ public class ReportGenerator
 			System.out.println(corridor);
 			if(corridor != null && ( altitude < corridor.getLowerLimit()
 					|| altitude > corridor.getUpperLimit() ) )
-				airplanesOut.add( airplane );
+				airplanesOut.add( (Airship)airplane );
 		}
 		
-		Collections.sort( airplanesOut, new AltitudeComparator() );
+		Collections.sort(airplanesOut, new AltitudeComparator());
 		
 		int transgressorsNumber = airplanesOut.size();
 		String[] arrayOfAirplanesOut = new String[transgressorsNumber];
