@@ -17,6 +17,7 @@ import java.util.Set;
 import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
 
 
@@ -54,7 +55,7 @@ public class ReportGenerator
 		if( data == null || source == null )
 			throw new InvalidArgumentException();
 		
-		Map< String, Airship > database = data.getDatabase();
+		Map< String, AirCraft > database = data.getDatabase();
 		
 		ReadAirplanesCoordinates reader = new ReadAirplanesCoordinates();
 		reader.readFromFile( source, data );
@@ -69,7 +70,7 @@ public class ReportGenerator
 		
 		while( iterator.hasNext() )
 		{
-			Airship airplane = database.get( iterator.next() );
+			AirCraft airplane = database.get( iterator.next() );
 			if( airplane.wasPositionUpdated() )
 			{
 				listToReturn.add( airplane.positionToString() );
@@ -125,17 +126,21 @@ public class ReportGenerator
 		if( data == null )
 			throw new InvalidArgumentException();
 		
-		Map< String, Airship > database = data.getDatabase();
-		ArrayList< Airship > airplanesOut = new ArrayList<>();
+		Map< String, AirCraft > database = data.getDatabase();
+		ArrayList< AirCraft > airplanesOut = new ArrayList<>();
 		
 		Set< String > idSet = database.keySet();
 		Iterator< String > iterator = idSet.iterator();
 		
 		while( iterator.hasNext() )
 		{
-			Airship airplane = database.get( iterator.next() );
-			AltitudeCorridor corridor = airplane.getCurrentCorridor();
-			double altitude = airplane.getGeographicPosition().getAltitude();
+			
+			AltitudeCorridor corridor = null;
+			AirCraft airplane = database.get( iterator.next() );
+			if (airplane instanceof Airship) {
+				corridor = ((Airship) airplane).getCurrentCorridor();
+			 }
+			 double altitude = airplane.getGeographicPosition().getAltitude();
 			
 			
 			System.out.println(corridor);

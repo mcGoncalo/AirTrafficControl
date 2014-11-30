@@ -21,4 +21,17 @@ public class CivilHelicopter extends Helicopter implements ICivil
 	{
 		return passengers;
 	}
+
+	@Override
+	/**
+	 * @param airliner
+	 * @return true if the CivilAirPlane has 0 passengers, false otherwise
+	 */
+	public boolean verifyEmptyPlaces()
+	{
+		if( getPassengersNumber() == 0 )
+			return true;
+		else 
+			return false;
+	}
 }

@@ -1,6 +1,7 @@
 package airtrafficcontrol.towerControl;
 import java.util.Comparator;
 
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
 
 /**
@@ -12,10 +13,10 @@ import airtrafficcontrol.hangar.Airship;
  *@author Lucas Andrade
  */
 
-public class AltitudeComparator implements Comparator<Airship> {
+public class AltitudeComparator implements Comparator<AirCraft> {
 
 	@Override
-	public int compare(Airship a1, Airship a2) {
+	public int compare(AirCraft a1, AirCraft a2) {
 		
 //		if(a1==null || a2 == null)
 //			try {

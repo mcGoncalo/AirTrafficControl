@@ -15,9 +15,13 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 public abstract class AirPlane extends Airship
 {
 	
+	
 	public AirPlane(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan )
 			throws InvalidArgumentException
 	{
 		super(flightID, statingPosition, flightPlan);
 	}
+	
+	
+	
 }

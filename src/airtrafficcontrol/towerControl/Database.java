@@ -9,8 +9,11 @@ import java.util.Set;
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.ICivil;
 
 
 /**
@@ -43,7 +46,7 @@ public class Database
 	/**
 	 * The container of {@link Airship airships}.
 	 */
-	private Map< String, Airship > database;
+	private Map< String, AirCraft > database;
 	
 	
 	// CONSTRUCTOR
@@ -65,7 +68,7 @@ public class Database
 	 * 
 	 * @return The whole data structure.
 	 */
-	public Map< String, Airship > getDatabase() {
+	public Map< String, AirCraft > getDatabase() {
 		return database;
 	}
 	
@@ -81,7 +84,7 @@ public class Database
 	 */
 	public String addDatabase( Database newData ) {
 		
-		Map< String, Airship > newDatabase = newData.getDatabase();
+		Map<String, AirCraft> newDatabase = newData.getDatabase();
 		
 		Set< String > idSet = newDatabase.keySet();
 		Iterator< String > iterator = idSet.iterator();
@@ -93,6 +96,7 @@ public class Database
 			String id = iterator.next();
 			if( !database.containsKey( id ) )
 			{
+				
 				database.put( id, newDatabase.get( id ) );
 				// - this and newData share the same data structure, so if this
 				// does not allow null keys or values, there's not the risk of
@@ -172,7 +176,7 @@ public class Database
 	 * @return the airplane with the ID passed as parameter
 	 * @return null if the airplane was not found
 	 */
-	public Airship getAirplane( String id ) {
+	public AirCraft getAirplane( String id ) {
 		if( database.containsKey( id ) )
 			return database.get( id );
 		else return null;
@@ -185,8 +189,8 @@ public class Database
 	 */
 	public void setAllAirplanesToNotUpdated() {
 		
-		Set< Map.Entry< String, Airship >> entries = database.entrySet();
-		for( Map.Entry< String, Airship > entry : entries )
+		Set< Map.Entry< String, AirCraft >> entries = database.entrySet();
+		for( Map.Entry< String, AirCraft > entry : entries )
 		{
 			entry.getValue().setToNotUpdated();
 		}
@@ -257,12 +261,12 @@ public class Database
 		int removedCount = 0;
 		ArrayList< String > toRemove = new ArrayList<>();
 		
-		Set< Map.Entry< String, Airship >> entries = database.entrySet();
-		for( Map.Entry< String, Airship > entry : entries )
+		Set< Map.Entry< String, AirCraft >> entries = database.entrySet();
+		for( Map.Entry< String, AirCraft > entry : entries )
 		{
-			Airship airplane = entry.getValue();
-			if( (airplane instanceof AirPlane)
-					&& ((AirPlane)airplane).getPassengersNumber() == 0 )
+			AirCraft airplane = entry.getValue();
+			if( (airplane instanceof ICivil)
+					&& ((ICivil) airplane).getPassengersNumber() == 0 )
 			{
 				toRemove.add( airplane.getFlightID() );
 				removedCount++ ;

@@ -29,6 +29,10 @@ public abstract class Airship extends AirCraft
 	 */
 	private FlightPlan flightPlan;
 	
+	
+	
+	
+	
 		
 	// CONSTRUCTOR
 	
@@ -168,6 +172,9 @@ public abstract class Airship extends AirCraft
 			return "The airplane has started its descent in order to land.";
 		else return "The airplane is switching corridors.";
 	}
+	
+	
+
 
 
 //	TODO

@@ -12,5 +12,7 @@ public interface ICivil
 	 * @return the number of passengers
 	 */
 	public int getPassengersNumber();
+	
+	public boolean verifyEmptyPlaces();
 
 }

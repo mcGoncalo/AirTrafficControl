@@ -37,7 +37,7 @@ public class CivilAirPlane extends AirPlane implements ICivil
 	 * @param airliner
 	 * @return true if the CivilAirPlane has 0 passengers, false otherwise
 	 */
-	public boolean isEmpty()
+	public boolean verifyEmptyPlaces()
 	{
 		if( getPassengersNumber() == 0 )
 			return true;
