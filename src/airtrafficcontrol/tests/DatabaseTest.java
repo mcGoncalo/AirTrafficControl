@@ -14,11 +14,19 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.CivilHelicopter;
 import airtrafficcontrol.hangar.MilitaryHelicopter;
 import airtrafficcontrol.towerControl.Database;
+
+
+
+
+/**
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
 
 public class DatabaseTest {
 	
@@ -128,7 +136,6 @@ public class DatabaseTest {
 		
 	Airship	airplane1 = new CivilAirPlane ("xpto01", new GeographicalPosition(20, 130, 0), new FlightPlan(new GregorianCalendar(2014, 11, 10, 00, 15), new GregorianCalendar(2014, 11, 10, 04, 15),9,9,6), 50);
 	Airship	cHeli = new CivilHelicopter("xpto02",new GeographicalPosition(30, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 11, 00, 15), new GregorianCalendar(2014, 11, 11, 04, 15),9,9,6), 10);
-	//Airship	mAirplane3 = new MilitaryAirPlane("xpto03",new GeographicalPosition(40, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 12, 00, 15), new GregorianCalendar(2014, 11, 12, 04, 15),5,6,6), true);
 	Airship	mHeli = new MilitaryHelicopter("xpto03",new GeographicalPosition(40, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 12, 00, 15), new GregorianCalendar(2014, 11, 12, 04, 15),5,6,6), true);
 	
 	Database newData = new Database();

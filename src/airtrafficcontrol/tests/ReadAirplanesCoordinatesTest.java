@@ -15,13 +15,16 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Transport;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.CargoAircraft;
+import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.MilitaryAirPlane;
 import airtrafficcontrol.towerControl.Database;
 import airtrafficcontrol.towerControl.ReadAirplanesCoordinates;
 import airtrafficcontrol.towerControl.ReportGenerator;
+
+
 
 public class ReadAirplanesCoordinatesTest {
 
@@ -30,11 +33,11 @@ public class ReadAirplanesCoordinatesTest {
 	Database data;
 	AirPlane airlWithZeroPass;
 	AirPlane airlWithSameID;
-	Transport transOutsideCorr;
-	CargoAircraft carg;
+	MilitaryAirPlane carg;
 	FlightPlan plan;
-	Map<String, Airship> dataMap;
+	Map<String, AirCraft> dataMap;
 	String source = "newCoordinatesTest.txt";
+	MilitaryAirPlane transOutsideCorr;
 	
 	@Before
 	public void constructAirplanesAndDatabase() throws InvalidArgumentException, InvalidFlightIDException
@@ -46,18 +49,18 @@ public class ReadAirplanesCoordinatesTest {
 		date2.add(12, 10);
 		
 		AltitudeCorridor corr = new AltitudeCorridor(80, 120);
-		plan = new FlightPlan(date1, date2);
+		plan = new FlightPlan(date1, date2, 9,9,6);
 		plan.addEvent(new AirCorridorInTime(date1, date2, corr));
 		
-		airlWithZeroPass = new AirPlane("airl123", new GeographicalPosition(0,0,100), plan, 0);
-		airlWithSameID = new AirPlane("airl123", new GeographicalPosition(0,0,100), plan, 200);
-		transOutsideCorr = new Transport("trp123", new GeographicalPosition(0,0,50), plan, false);
-		carg = new CargoAircraft("crg123", new GeographicalPosition(0,0,100), plan);
+		airlWithZeroPass = new CivilAirPlane("airl123", new GeographicalPosition(0,0,100), plan, 0);
+		airlWithSameID = new CivilAirPlane("airl123", new GeographicalPosition(0,0,100), plan, 200);
+		transOutsideCorr = new MilitaryAirPlane("trp123", new GeographicalPosition(0,0,50), plan, false);
+		carg = new MilitaryAirPlane("crg123", new GeographicalPosition(0,0,100), plan, false);
 		
 		data = new Database();
 		
-		data.addAirplane(airlWithZeroPass);
-		data.addAirplane(transOutsideCorr);
+		data.addAirship(airlWithZeroPass);
+		data.addAirship(transOutsideCorr);
 		
 		dataMap = data.getDatabase();
 	}
