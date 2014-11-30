@@ -14,6 +14,10 @@ import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+/**
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
 public class FlightPlanTest {
 
 	Calendar hourDep;
@@ -69,7 +73,7 @@ public class FlightPlanTest {
 		secondCorridor = new AirCorridorInTime(startSecond, endSecond, secondAltCorridor);
 		landing = new AirCorridorInTime(endSecond, hourLand, null);
 		
-		plan = new FlightPlan(hourDep, hourLand);
+		plan = new FlightPlan(hourDep, hourLand, 9, 9, 6);
 		
 		plan.addEvent(gainingAltitude);
 		plan.addEvent(firstCorridor);
@@ -193,7 +197,7 @@ public class FlightPlanTest {
 		newLandHour.add(12, 80);
 		
 		plan.addEvent(landing);
-		plan.setNewArrivalHour(newLandHour, 10);
+		plan.setNewArrivalHour(newLandHour);
 		
 		assertEquals(plan.getLastEvent().getEndingHour(), newLandHour);
 		
@@ -204,6 +208,7 @@ public class FlightPlanTest {
 		assertEquals(list.get(3).getEndingHour(), newLandHour);
 		assertEquals(list.get(3).getStartingHour(), startSecond);
 	}
+	
 	
 	@Test
 	public void shouldGetTheCorrectTakeOffDate()
@@ -216,4 +221,55 @@ public class FlightPlanTest {
 	{
 		assertEquals(hourLand, plan.getLandingDate());
 	}
+	
+	
+	@Test
+	public void shouldGetCorrectNumberOfMinutesToTakeOffOfFligthPlan()throws InvalidArgumentException {
+		
+		assertEquals(9, plan.getNumberOfMinutesToTakeOff());
+	}
+	
+	@Test
+	public void shouldGetCorrectNumberOfMinutesToLandOfFligthPlan() throws InvalidArgumentException {
+	
+		assertEquals(9, plan.getNumberOfMinutesToLand());
+	}
+	
+	
+	@Test
+	public void shouldGetCorrectNumberOfMinutesToSwitchCorridorOfFligthPlan() throws InvalidArgumentException {
+		
+		assertEquals(6, plan.getNumberOfMinutesToSwitchCorridor());
+	}
+	
+	
+	@Test
+	public void shouldAlterTheNumberOfMinutesToTakeOffOfFligthPlan() throws InvalidArgumentException {
+		
+		assertEquals(9, plan.getNumberOfMinutesToTakeOff());
+		
+		plan.setNumberOfMinutesToTakeOff(14);
+		assertEquals(14, plan.getNumberOfMinutesToTakeOff());
+
+	}
+	
+	
+	@Test
+	public void shouldAlterTheNumberOfMinutesToLandOfFligthPlan() throws InvalidArgumentException {
+		assertEquals(9, plan.getNumberOfMinutesToLand());
+				
+		plan.setNumberOfMinutesToLand(20);
+		assertEquals(20, plan.getNumberOfMinutesToLand());
+	}
+	
+	
+	@Test
+	public void shouldAlterTheNumberOfMinutesToSwitchCorridorOfFligthPlan() throws InvalidArgumentException {
+		
+		assertEquals(6, plan.getNumberOfMinutesToSwitchCorridor());
+		
+		plan.setNumberOfMinutesToSwitchCorridor(1);
+		assertEquals(1, plan.getNumberOfMinutesToSwitchCorridor());
+	}
+	
 }

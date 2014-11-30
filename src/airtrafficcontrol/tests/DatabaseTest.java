@@ -14,20 +14,19 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Transport;
-import airtrafficcontrol.hangar.AirPlane;
+import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.CargoAircraft;
-import airtrafficcontrol.hangar.PrivateJet;
+import airtrafficcontrol.hangar.CivilHelicopter;
+import airtrafficcontrol.hangar.MilitaryHelicopter;
 import airtrafficcontrol.towerControl.Database;
 
 public class DatabaseTest {
 	
 	Database data;
-	AirPlane airlWithZeroPass;
-	AirPlane airlWithSameID;
-	Transport transOutsideCorr;
-	CargoAircraft carg;
+	CivilAirPlane airlWithZeroPass;
+	CivilAirPlane airlWithSameID;
+	CivilHelicopter transOutsideCorr;
+	MilitaryHelicopter carg;
 	FlightPlan plan;
 	
 	@Before
@@ -38,29 +37,29 @@ public class DatabaseTest {
 		date2.add(12, 10);
 		
 		AltitudeCorridor corr = new AltitudeCorridor(80, 120);
-		plan = new FlightPlan(date1, date2);
+		plan = new FlightPlan(date1, date2, 9, 9, 6);
 		plan.addEvent(new AirCorridorInTime(date1, date2, corr));
 		
-		airlWithZeroPass = new AirPlane("airl123", new GeographicalPosition(0,0,100), plan, 0);
-		airlWithSameID = new AirPlane("airl123", new GeographicalPosition(0,0,100), plan, 200);
-		transOutsideCorr = new Transport("trp123", new GeographicalPosition(0,0,50), plan, false);
-		carg = new CargoAircraft("crg123", new GeographicalPosition(0,0,100), plan);
+		airlWithZeroPass = new CivilAirPlane("airl123", new GeographicalPosition(0,0,100), plan, 0);
+		airlWithSameID = new CivilAirPlane("airl123", new GeographicalPosition(0,0,100), plan, 200);
+		transOutsideCorr = new CivilHelicopter("trp123", new GeographicalPosition(0,0,50), plan, 20);
+		carg = new MilitaryHelicopter("crg123", new GeographicalPosition(0,0,100), plan, false);
 		
 		data = new Database();
 		
-		data.addAirplane(airlWithZeroPass);
-		data.addAirplane(transOutsideCorr);
+		data.addAirship(airlWithZeroPass);
+		data.addAirship(transOutsideCorr);
 	}
 	
 	@Test
 	public void shouldAddTheNewAirplane() throws InvalidFlightIDException, InvalidArgumentException {
-		assertTrue(data.addAirplane(carg));
+		assertTrue(data.addAirship(carg));
 	}
 	
 	@Test
 	public void shouldNotAddAnAirplaneWithARepeatedID() throws InvalidFlightIDException, InvalidArgumentException
 	{
-		assertFalse(data.addAirplane(airlWithSameID));
+		assertFalse(data.addAirship(airlWithSameID));
 	}
 	
 	@Test
@@ -93,7 +92,7 @@ public class DatabaseTest {
 	@Test
 	public void shouldNotRemoveAnAirplaneThatDoesNotExist2() throws InvalidFlightIDException, InvalidArgumentException
 	{
-		assertFalse(data.removeAirplane(new AirPlane("air", new GeographicalPosition(0,0,0), plan, 0)));
+		assertFalse(data.removeAirplane(new CivilAirPlane("air", new GeographicalPosition(0,0,0), plan, 0)));
 	}
 	
 	@Test
@@ -107,8 +106,8 @@ public class DatabaseTest {
 	@Test
 	public void shouldRemoveTwoAirplanesWithZeroPassengers() throws InvalidArgumentException, InvalidFlightIDException
 	{
-		PrivateJet priv = new PrivateJet("priv123", new GeographicalPosition(0,0,100), plan, 0);
-		data.addAirplane(priv);
+		CivilHelicopter priv = new CivilHelicopter("priv123", new GeographicalPosition(0,0,100), plan, 0);
+		data.addAirship(priv);
 		
 		assertEquals(data.getDatabase().size(), 3);
 		assertEquals(2, data.removeAirplanesWithZeroPassengers());
@@ -127,22 +126,21 @@ public class DatabaseTest {
 	public void shouldGetTheNumberOfAirshipsInTheDatabase()throws InvalidArgumentException, InvalidFlightIDException
 	{
 		
-	Airship	airplane1 = new AirPlane ("xpto01", new GeographicalPosition(20, 130, 0), new FlightPlan(new GregorianCalendar(2014, 11, 10, 00, 15), new GregorianCalendar(2014, 11, 10, 04, 15)), 50);
-	Airship	airplane2 = new PrivateJet("xpto02",new GeographicalPosition(30, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 11, 00, 15), new GregorianCalendar(2014, 11, 11, 04, 15)), 10);
-	Airship	airplane3 = new CargoAircraft("xpto03",new GeographicalPosition(40, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 12, 00, 15), new GregorianCalendar(2014, 11, 12, 04, 15)));
-	Airship	airplane4 = new Transport("xpto04",new GeographicalPosition(20.00, 130.00, 0.00), new FlightPlan(new GregorianCalendar(2014, 11, 13, 00, 15), new GregorianCalendar(2014, 11, 13, 04, 15)), false);
+	Airship	airplane1 = new CivilAirPlane ("xpto01", new GeographicalPosition(20, 130, 0), new FlightPlan(new GregorianCalendar(2014, 11, 10, 00, 15), new GregorianCalendar(2014, 11, 10, 04, 15),9,9,6), 50);
+	Airship	cHeli = new CivilHelicopter("xpto02",new GeographicalPosition(30, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 11, 00, 15), new GregorianCalendar(2014, 11, 11, 04, 15),9,9,6), 10);
+	//Airship	mAirplane3 = new MilitaryAirPlane("xpto03",new GeographicalPosition(40, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 12, 00, 15), new GregorianCalendar(2014, 11, 12, 04, 15),5,6,6), true);
+	Airship	mHeli = new MilitaryHelicopter("xpto03",new GeographicalPosition(40, 30, 0), new FlightPlan(new GregorianCalendar(2014, 11, 12, 00, 15), new GregorianCalendar(2014, 11, 12, 04, 15),5,6,6), true);
 	
 	Database newData = new Database();
 	
-	newData.addAirplane(airplane1);
-	newData.addAirplane(airplane2);
-	newData.addAirplane(airplane3);
-	newData.addAirplane(airplane4);
+	newData.addAirship(airplane1);
+	newData.addAirship(cHeli);
+	newData.addAirship(mHeli);
 	
 	int numberOfAirships = 0;
 	numberOfAirships = newData.countAirships();
 	
-	assertTrue( 4 == numberOfAirships);
+	assertTrue( 3 == numberOfAirships);
 	}
 
 }

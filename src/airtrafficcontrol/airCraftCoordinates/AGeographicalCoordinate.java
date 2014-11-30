@@ -37,6 +37,8 @@ public abstract class AGeographicalCoordinate
 	{
 		return geographicalCoordinate;
 	}
+	
+	
 }
 
 

@@ -13,8 +13,9 @@ import airtrafficcontrol.app.appforconsole.ConsoleInputHandler;
 import airtrafficcontrol.app.exceptions.DatabaseNotFoundException;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.hangar.AirPlane;
+import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.Airship;
+import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.towerControl.Database;
 
 
@@ -29,9 +30,8 @@ import airtrafficcontrol.towerControl.Database;
  * <li>Needs input from console to test.</li>
  * </ul>
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 @SuppressWarnings( "static-access" )
 public class ConsoleInputHandlerTest
@@ -169,12 +169,12 @@ public class ConsoleInputHandlerTest
 			InvalidFlightIDException {
 		
 		// assert
-		Airship airplane1 = new AirPlane( "xpto01", new GeographicalPosition(
+		Airship airplane1 = new CivilAirPlane( "xpto01", new GeographicalPosition(
 				20, 130, 0 ), new FlightPlan( new GregorianCalendar( 2014, 11,
-				10, 00, 15 ), new GregorianCalendar( 2014, 11, 10, 04, 15 ) ),
+				10, 00, 15 ), new GregorianCalendar( 2014, 11, 10, 04, 15 ), 9, 9, 6 ),
 				50 );
 		Database db = new Database();
-		db.addAirplane( airplane1 );
+		db.addAirship( airplane1 );
 		
 		// act & assert
 		assertEquals( "xpto01",
@@ -186,12 +186,11 @@ public class ConsoleInputHandlerTest
 	public void shouldContinueAskingAFlightIDInADatabase()
 			throws InvalidArgumentException, DatabaseNotFoundException,
 			InvalidFlightIDException {
-		Airship airplane1 = new AirPlane( "xpto01", new GeographicalPosition(
-				20, 130, 0 ), new FlightPlan( new GregorianCalendar( 2014, 11,
-				10, 00, 15 ), new GregorianCalendar( 2014, 11, 10, 04, 15 ) ),
-				50 );
+		Airship airplane1 = new CivilAirPlane( "xpto01", new GeographicalPosition(20, 130, 0 ), 
+				new FlightPlan( new GregorianCalendar( 2014, 11, 10, 00, 15 ), 
+				new GregorianCalendar( 2014, 11, 10, 04, 15 ), 9, 9, 6), 50 );
 		Database db = new Database();
-		db.addAirplane( airplane1 );
+		db.addAirship( airplane1 );
 		
 		assertEquals(
 				"xpto01",
@@ -202,12 +201,11 @@ public class ConsoleInputHandlerTest
 	@Test
 	public void shouldReturnABORT() throws InvalidArgumentException,
 			DatabaseNotFoundException, InvalidFlightIDException {
-		Airship airplane1 = new AirPlane( "xpto01", new GeographicalPosition(
-				20, 130, 0 ), new FlightPlan( new GregorianCalendar( 2014, 11,
-				10, 00, 15 ), new GregorianCalendar( 2014, 11, 10, 04, 15 ) ),
-				50 );
+		Airship airplane1 = new CivilAirPlane( "xpto01", new GeographicalPosition(20, 130, 0 ),
+				new FlightPlan( new GregorianCalendar( 2014, 11,10, 00, 15 ), 
+				new GregorianCalendar( 2014, 11, 10, 04, 15 ), 9, 9, 6 ), 50 );
 		Database db = new Database();
-		db.addAirplane( airplane1 );
+		db.addAirship( airplane1 );
 		
 		assertEquals( "ABORT",
 				in.get_AFlightIDExistentInACertainDatabase_FromUser( db,

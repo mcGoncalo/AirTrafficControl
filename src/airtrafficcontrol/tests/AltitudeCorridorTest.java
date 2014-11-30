@@ -19,10 +19,7 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
  * <ul>
  * <li>Needs input from console to test.</li>
  * </ul>
- *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
  */
 public class AltitudeCorridorTest
 {

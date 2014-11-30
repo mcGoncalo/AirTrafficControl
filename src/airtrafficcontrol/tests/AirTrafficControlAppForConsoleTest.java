@@ -9,10 +9,7 @@ import airtrafficcontrol.app.menuoptions.HelpOption_for_EHLsATCAppForConsole;
 
 /**
  * Test class that targets the class {@link AirTrafficControlAppForConsole}.
- *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
  */
 public class AirTrafficControlAppForConsoleTest
 {

@@ -51,34 +51,6 @@ public class GeographicalPositionTest {
 		assertTrue(_geoPosObj.getAltitude() == _geoPosVal.getAltitude());
 	}
 	
-	@Test
-	public void shouldIncrementGeographicalPositionWithLatitudeLongitudeAndAltitudeObjects() throws InvalidArgumentException
-	{
-		//Arrange
-		Latitude lat = new Latitude(10.00);
-		Longitude lon = new Longitude(10.00);
-		Altitude alt = new Altitude(100.00);
-		
-		//Act
-		_geoPosObj.incrementPosition(lat, lon, alt);
-		
-		//Assert
-		assertTrue(70 == _geoPosObj.getLatitude());
-		assertTrue(170 == _geoPosObj.getLongitude());
-		assertTrue(1700 == _geoPosObj.getAltitude());
-	}
-	
-	@Test
-	public void shouldIncrementGeographicalPositionWithLatitudeLongitudeAndAltitudeValues() throws InvalidArgumentException
-	{
-		//Act
-		_geoPosObj.incrementPosition(10, 10, 100);
-		
-		//Assert
-		assertTrue(70 == _geoPosObj.getLatitude());
-		assertTrue(170 == _geoPosObj.getLongitude());
-		assertTrue(1700 == _geoPosObj.getAltitude());
-	}
 	
 
 	@Test
@@ -150,72 +122,5 @@ public class GeographicalPositionTest {
 		assertTrue(11000.00 == _geoPosObj.getAltitude());
 	}
 	
-	@Test
-	public void shouldIncrementsALatitudeInAGeographicalPositionWithAValue() throws InvalidArgumentException
-	{
-		//Act
-		_geoPosObj.incrementLatitude(10);;
 	
-		//Assert
-		assertTrue(70 == _geoPosObj.getLatitude());
-	}
-	
-	@Test
-	public void shouldIncrementsALatitudeInAGeographicalPositionWithAnObject() throws InvalidArgumentException
-	{
-		//Arrange
-		Latitude lat = new Latitude(10);
-		
-		//Act
-		_geoPosObj.incrementLatitude(lat);;
-	
-		//Assert
-		assertTrue(70 == _geoPosObj.getLatitude());
-	}
-	
-	@Test
-	public void shouldIncrementsALongitudeInAGeographicalPositionWithAValue()
-	{
-		//Act
-		_geoPosObj.incrementLongitude(10);
-	
-		//Assert
-		assertTrue(170 == _geoPosObj.getLongitude());
-	}
-	
-	@Test
-	public void shouldIncrementsALongitudeInAGeographicalPositionWithAnObject() throws InvalidArgumentException
-	{
-		//Arrange
-		Longitude lon = new Longitude(10);
-		
-		//Act
-		_geoPosObj.incrementLongitude(lon);
-	
-		//Assert
-		assertTrue(170 == _geoPosObj.getLongitude());
-	}
-	
-	@Test
-	public void shouldIncrementsAnAltitudeInAGeographicalPositionWithAValue()
-	{
-		//Act
-		_geoPosObj.incrementAltitude(1000.00);
-	
-		//Assert
-		assertTrue(2600.00 == _geoPosObj.getAltitude());
-	}
-	
-	@Test
-	public void shouldIncrementsAnAltitudeInAGeographicalPositionWithAnObject() throws InvalidArgumentException
-	{
-		//Arrange
-		Altitude alt = new Altitude(1000.00);
-		
-		//Act
-		_geoPosObj.incrementAltitude(alt);;
-	
-		//Assert
-		assertTrue(2600.00 == _geoPosObj.getAltitude());
-	}
 }

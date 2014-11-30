@@ -18,12 +18,15 @@ import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.towerControl.ReadListOfFlights;
 
-public class AirplaneTest_UsingAirlinerInstance {
+/**
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
+
+public class AirplaneTest_UsingCivilAirplaneInstance {
 
 	private Airship airliner;
 	private static GeographicalPosition geo;
-
-	
 	
 	Calendar date1;
 	Calendar date2;
@@ -39,11 +42,13 @@ public class AirplaneTest_UsingAirlinerInstance {
 		airliner = new CivilAirPlane("rj351", geo, new FlightPlan(date1, date2, 9,9,6), 100);
 	}
 	
+	
 	@Test
 	public void shouldReturnTheFlightID()
 	{
 		assertEquals("rj351", airliner.getFlightID());
 	}
+	
 	
 	@Test
 	public void shouldReturnTheCorrectGeographicalPosition()
@@ -60,6 +65,7 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(newGeographicalPosition, airliner.getGeographicPosition());
 	}
 	
+	
 	@Test
 	public void shouldGetTheCorridorNullBecauseItIsStillGainingAltitude() throws InvalidArgumentException
 	{
@@ -67,12 +73,14 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(airliner2.getCurrentCorridor(), null);
 	}
 	
+	
 	@Test
 	public void shouldGetTheCorridorNullBecauseItIsLanding() throws InvalidArgumentException
 	{
 		AirPlane airliner2 = makeAnAirplaneWithAPlan(-50);
 		assertEquals(airliner2.getCurrentCorridor(), null);
 	}
+	
 	
 	@Test
 	public void shouldGetMidFlightCorridor() throws InvalidArgumentException
@@ -85,12 +93,14 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(100, (int)minAlt);
 	}
 	
+	
 	@Test
 	public void shoudGetTheRightObservation_TakingOff() throws InvalidArgumentException
 	{
 		AirPlane airliner2 = makeAnAirplaneWithAPlan(-10);
 		assertEquals(airliner2.getObservations(), "The air plane has took off and is gaining altitude.");
 	}
+	
 	
 	@Test
 	public void shouldGetTheRightObservation_Landing() throws InvalidArgumentException
@@ -99,12 +109,14 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(airliner2.getObservations(), "The airplane has started its descent in order to land.");
 	}
 	
+	
 	@Test
 	public void shouldGetTheRightObservation_OutsideCorridor() throws InvalidArgumentException
 	{
 		AirPlane airliner2 = makeAnAirplaneWithAPlan(-30);
 		assertEquals(airliner2.getObservations(), "WARNING: The airplane is outside of the corridor.");
 	}
+	
 	
 	@Test
 	public void shouldGetTheRightObservation_NoObservation() throws InvalidArgumentException
@@ -116,6 +128,7 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(airliner2.getObservations(), "");
 	}
 	
+	
 	@Test
 	public void shouldGetTheRightObservation_HasNotTakenOff() throws InvalidArgumentException
 	{
@@ -123,12 +136,14 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(airliner2.getObservations(), "The airplane has not taken off yet.");
 	}
 	
+	
 	@Test
 	public void shouldGetTheRightObservation_HasAlreadyLanded() throws InvalidArgumentException
 	{
 		AirPlane airliner2 = makeAnAirplaneWithAPlan(-70);
 		assertEquals(airliner2.getObservations(), "The airplane has already landed.");
 	}
+	
 	
 	@Test 
 	public void shouldCorrectlySetTheNewArrivalDate() throws InvalidArgumentException
@@ -144,12 +159,6 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(airliner2.getPlan().getLastEvent().getStartingHour(), newLanding);
 	}
 	
-	@Test
-	public void shouldReturnTheCorrectString() throws InvalidArgumentException
-	{
-		AirPlane airliner2 = makeAnAirplaneWithAPlan(-30);
-		assertEquals("id123 12.0 10.0 1.0 " + airliner2.getObservations(), airliner2.positionToString());
-	}
 	
 	@Test
 	public void shouldReturnTheCorrectTakeOffDate() throws InvalidArgumentException
@@ -162,6 +171,7 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(hourTakeOff, airliner3.getTakeOffDate());
 	}
 	
+	
 	@Test
 	public void shouldReturnTheCorrectLandingDate() throws InvalidArgumentException
 	{
@@ -173,6 +183,13 @@ public class AirplaneTest_UsingAirlinerInstance {
 		assertEquals(hourLand, airliner3.getLandingDate());
 	}
 	
+	
+//	@Test
+//	public void shouldReturnTheCorrectString() throws InvalidArgumentException
+//	{
+//		AirPlane airliner2 = makeAnAirplaneWithAPlan(-30);
+//		assertEquals("id123 12.0 10.0 1.0 " + airliner2.getObservations(), airliner2.positionToString());
+//	}
 	
 	
 	private static AirPlane makeAnAirplaneWithAPlan(int diff) throws InvalidArgumentException
@@ -195,7 +212,7 @@ public class AirplaneTest_UsingAirlinerInstance {
 		AirCorridorInTime corridor = new AirCorridorInTime(startCorr, endCorr, corr);
 		AirCorridorInTime landing = new AirCorridorInTime(endCorr, hourLand, null);
 		
-		FlightPlan plan = new FlightPlan(hourDep, hourLand, 10, 12, 6);
+		FlightPlan plan = new FlightPlan(hourDep, hourLand, 20, 20, 10);
 		
 		plan.addEvent(gainingAltitude);
 		plan.addEvent(corridor);

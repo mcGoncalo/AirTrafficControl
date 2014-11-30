@@ -13,6 +13,9 @@ import airtrafficcontrol.AirShipPlan.AirCorridorInTime;
 import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+/**
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
+ */
 public class AirCorridorInTimeTest {
 
 	AirCorridorInTime corridorInTime;

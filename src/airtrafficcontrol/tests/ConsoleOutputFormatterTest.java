@@ -10,9 +10,8 @@ import airtrafficcontrol.app.appforconsole.ConsoleOutputFormatter;
 /**
  * Test class that targets the class {@link ConsoleOutputFormatter}.
  *
- * @author Eva Gomes
- * @author Hugo Leal
- * @author Lucas Andrade
+/**
+ * @author Eva Gomes, Hugo Leal, Lucas Andrade
  */
 public class ConsoleOutputFormatterTest
 {
