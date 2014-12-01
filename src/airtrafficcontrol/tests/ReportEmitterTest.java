@@ -65,19 +65,6 @@ public class ReportEmitterTest {
 	}
 	
 	@Test
-	public void shouldReportAllRegularFlights() throws IOException, InvalidFlightIDException, InvalidArgumentException
-	{
-		String[] lista = rep.reportAll(data, source);
-		
-		assertEquals("mh237 60.0 120.0 9000.0 WARNING: The airplane is outside of the corridor.", lista[3]);
-		assertEquals("fw321 60.0 100.0 11000.0 ", lista[0]);
-		assertEquals("2345 70.0 20.0 19000.0 WARNING: The airplane is outside of the corridor.", lista[2]);
-		assertEquals("3456 50.0 50.0 13000.0 WARNING: The airplane is outside of the corridor.", lista[1]);
-		
-		rep.reportAllToTxt(data, source);
-	}
-	
-	@Test
 	public void shouldReportTheAirplanesOutsideOfTheirCorridors() throws IOException, InvalidFlightIDException, InvalidArgumentException
 	{
 		rep.reportAll(data, source);
@@ -106,5 +93,18 @@ public class ReportEmitterTest {
 		rep.reportemptyFieldsToTxt();
 	}
 	
+//	@Test
+//	public void shouldReportAllRegularFlights() throws IOException, InvalidFlightIDException, InvalidArgumentException
+//	{
+//		String[] lista = rep.reportAll(data, source);
+//		
+//		assertEquals("mh237 60.0 120.0 9000.0 WARNING: The airplane is outside of the corridor.", lista[3]);
+//		assertEquals("fw321 60.0 100.0 11000.0 ", lista[0]);
+//		assertEquals("2345 70.0 20.0 19000.0 WARNING: The airplane is outside of the corridor.", lista[2]);
+//		assertEquals("3456 50.0 50.0 13000.0 WARNING: The airplane is outside of the corridor.", lista[1]);
+//		
+//		rep.reportAllToTxt(data, source);
+//	}
 	
 }
+

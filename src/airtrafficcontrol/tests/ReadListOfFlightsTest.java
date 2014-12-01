@@ -38,18 +38,18 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void testNumberOfAirplanes()
 	{
-		assertEquals(6, data.size());
+		assertEquals(4, data.size());
 	}
 	
 	@Test
 	public void shouldHaveTheRightTypeOfAirplanes()
 	{
+		
 		assertTrue(data.get("xptofligth01") instanceof airtrafficcontrol.hangar.MilitaryHelicopter);
-		assertTrue(data.get("xptofligth02") instanceof airtrafficcontrol.hangar.AirPlane);
-		assertTrue(data.get("xptofligth03") instanceof airtrafficcontrol.hangar.AirPlane);
-		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.hangar.CivilAirPlane);
-		assertTrue(data.get("xptofligth05") instanceof airtrafficcontrol.hangar.MilitaryAirPlane);
-		assertTrue(data.get("xptofligth06") instanceof airtrafficcontrol.hangar.MilitaryAirPlane);
+		assertTrue(data.get("xptofligth02") instanceof airtrafficcontrol.hangar.CivilAirPlane);
+		assertTrue(data.get("xptofligth03") instanceof airtrafficcontrol.hangar.CivilAirPlane);
+		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.hangar.CivilHelicopter);
+
 	}
 	
 	@Test
@@ -136,48 +136,7 @@ public class ReadListOfFlightsTest {
 		assertEquals(43, landing.get(Calendar.MINUTE));
 	}
 	
-	@Test
-	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf5()
-	{
-		Airship mAirplaine = (Airship) data.get("xptofligth05");
-		
-		Calendar takeOff = mAirplaine.getTakeOffDate();
-		Calendar landing = mAirplaine.getLandingDate();
-		
-		assertEquals(2014, takeOff.get(Calendar.YEAR));
-		assertEquals(11 - 1, takeOff.get(Calendar.MONTH));
-		assertEquals(6, takeOff.get(Calendar.DAY_OF_MONTH));
-		assertEquals(21, takeOff.get(Calendar.HOUR_OF_DAY));
-		assertEquals(38, takeOff.get(Calendar.MINUTE));
-		
-		assertEquals(2014, landing.get(Calendar.YEAR));
-		assertEquals(11 - 1, landing.get(Calendar.MONTH));
-		assertEquals(7, landing.get(Calendar.DAY_OF_MONTH));
-		assertEquals(4, landing.get(Calendar.HOUR_OF_DAY));
-		assertEquals(12, landing.get(Calendar.MINUTE));
-	}
-	
-	@Test
-	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf6()
-	{
-		Airship mAirplaine1 = (Airship) data.get("xptofligth06");
-		
-		Calendar takeOff = mAirplaine1.getTakeOffDate();
-		Calendar landing = mAirplaine1.getLandingDate();
-		
-		assertEquals(2014, takeOff.get(Calendar.YEAR));
-		assertEquals(11 - 1, takeOff.get(Calendar.MONTH));
-		assertEquals(7, takeOff.get(Calendar.DAY_OF_MONTH));
-		assertEquals(0, takeOff.get(Calendar.HOUR_OF_DAY));
-		assertEquals(0, takeOff.get(Calendar.MINUTE));
-		
-		assertEquals(2014, landing.get(Calendar.YEAR));
-		assertEquals(11 - 1, landing.get(Calendar.MONTH));
-		assertEquals(7, landing.get(Calendar.DAY_OF_MONTH));
-		assertEquals(4, landing.get(Calendar.HOUR_OF_DAY));
-		assertEquals(22, landing.get(Calendar.MINUTE));
-	}
-	
+
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf1()
 	{
@@ -222,27 +181,6 @@ public class ReadListOfFlightsTest {
 		assertEquals(0, pos.getAltitude(), 0.01);
 	}
 	
-	@Test
-	public void shouldReturnTheCorrectTakeOffCoordinatesOf5()
-	{
-		AirCraft militaryPlane = data.get("xptofligth05");
-		GeographicalPosition pos = militaryPlane.getGeographicPosition();
-		
-		assertEquals(-67.39, pos.getLatitude(), 0.01);
-		assertEquals(-10, pos.getLongitude(), 0.01);
-		assertEquals(0, pos.getAltitude(), 0.01);
-	}
-	
-	@Test
-	public void shouldReturnTheCorrectTakeOffCoordinatesOf6()
-	{
-		AirCraft cargo = data.get("xptofligth06");
-		GeographicalPosition pos = cargo.getGeographicPosition();
-		
-		assertEquals(17.33, pos.getLatitude(), 0.01);
-		assertEquals(52.05, pos.getLongitude(), 0.01);
-		assertEquals(0, pos.getAltitude(), 0.01);
-	}
 	
 	@Test
 	public void shouldReturnTrueBecauseTheFirstAirplaneHasArmament()
@@ -274,9 +212,7 @@ public class ReadListOfFlightsTest {
 		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 30)).getUpperLimit(), 0.01);
 		assertEquals(10500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 30)).getLowerLimit(), 0.01);
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 34)));
-		assertEquals(12000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 40)).getUpperLimit(), 0.01);
-		assertEquals(11000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 40)).getLowerLimit(), 0.01);
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 11, 11)));
+
 	}
 	
 	@Test
@@ -326,34 +262,5 @@ public class ReadListOfFlightsTest {
 		assertEquals(12000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 00)).getLowerLimit(), 0.01);
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 42)));
 	}
-	
-	@Test
-	public void shouldReturnTheRightCorridorFor5() throws InvalidArgumentException
-	{
-		Airship militaryPlane = (Airship) data.get("xptofligth05");
-		FlightPlan plan = militaryPlane.getPlan();
-		
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 21, 39)));
-		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 23, 56)).getUpperLimit(), 0.01);
-		assertEquals(10500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 23, 56)).getLowerLimit(), 0.01);
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 0, 0)));
-		assertEquals(12000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 3, 00)).getUpperLimit(), 0.01);
-		assertEquals(11000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 3, 00)).getLowerLimit(), 0.01);
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 11)));
-	}
-	
-	@Test
-	public void shouldReturnTheRightCorridorFor6() throws InvalidArgumentException
-	{
-		Airship militaryCargo = (Airship) data.get("xptofligth06");
-		FlightPlan plan = militaryCargo.getPlan();
-		
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 0, 1)));
-		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 2, 0)).getUpperLimit(), 0.01);
-		assertEquals(10500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 2, 0)).getLowerLimit(), 0.01);
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 2, 4)));
-		assertEquals(12000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 00)).getUpperLimit(), 0.01);
-		assertEquals(11000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 00)).getLowerLimit(), 0.01);
-		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 4, 21)));
-	}
+
 }
