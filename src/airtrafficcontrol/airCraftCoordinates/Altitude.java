@@ -4,6 +4,7 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
  * This class represents an Altitude value.
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class Altitude extends AGeographicalCoordinate
 {

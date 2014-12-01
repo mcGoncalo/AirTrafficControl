@@ -10,6 +10,7 @@ package airtrafficcontrol.hangar;
 public interface IMilitary
 {
 	/**
+	 * This method differentiates if an  aircraift is military or civil
 	 * @return true if have armament, false otherwise 
 	 */
 	public boolean hasArmament();

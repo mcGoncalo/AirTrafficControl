@@ -12,7 +12,10 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 public abstract class AirPlane extends Airship
 {
 	
-	
+	/**
+	 * This construtor identifies the features if the airplane and throws an IO exception if
+	 * these features aren't verified 
+	 */
 	public AirPlane(String flightID, GeographicalPosition statingPosition, FlightPlan flightPlan )
 			throws InvalidArgumentException
 	{

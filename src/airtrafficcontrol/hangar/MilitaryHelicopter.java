@@ -8,13 +8,17 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
 /**
- * 
+ * This class defines if an aircraft is a military helicopter
  * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public class MilitaryHelicopter extends AirPlane implements IMilitary
 {
 	private boolean hasArmament;
 
+	
+	/**
+	 * This constructor defines the military helicopter
+	 */
 	public MilitaryHelicopter(String flightID,
 			GeographicalPosition statingPosition, FlightPlan flightPlan, boolean hasArmament) throws InvalidArgumentException
 	{
@@ -22,6 +26,10 @@ public class MilitaryHelicopter extends AirPlane implements IMilitary
 		this.hasArmament = hasArmament;
 	}
 
+	
+	/**
+	 * This method differentiates military from civil
+	 */
 	@Override
 	public boolean hasArmament()
 	{

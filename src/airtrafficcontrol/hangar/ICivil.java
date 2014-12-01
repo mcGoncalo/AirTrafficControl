@@ -9,10 +9,16 @@ package airtrafficcontrol.hangar;
 public interface ICivil
 {
 	/**
+	 * This method is about civil aircrafts
 	 * @return the number of passengers
 	 */
 	public int getPassengersNumber();
+		return PassengersNumber;
 	
+	/**
+	 * This method is about civil aircrafts
+	 * @return true if the aircraft as any empty place 
+	 */
 	public boolean verifyEmptyPlaces();
-
+		return verifyEmptyPlaces;
 }

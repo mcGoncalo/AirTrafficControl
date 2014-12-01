@@ -4,10 +4,20 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+
+/**
+ * This class identifies a civil airplane
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
 public class CivilAirPlane extends AirPlane implements ICivil
 {
-	private int passengersNum;
+	private int passengersNum;	// This variable is private because is only verified in this class
 	
+	
+	/**
+	 * This constructor identifies any civil airplane, and throws an IO exception if 
+	 * this aircraft isn't properly defined
+	 */
 	public CivilAirPlane( 	String flightID,
 							GeographicalPosition statingPosition,
 							FlightPlan flightPlan,
@@ -79,7 +89,10 @@ public class CivilAirPlane extends AirPlane implements ICivil
 	
 	
 	
-
+	/**
+	 * This method defines the time (in minutes) for the civil airplane to land,
+	 * and throws IO exception if this interlude is not respected
+	 */
 	public void setTimeToLand(int newTime) throws InvalidArgumentException
 	
 	{		

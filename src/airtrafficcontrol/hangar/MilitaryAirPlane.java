@@ -34,6 +34,10 @@ public class MilitaryAirPlane extends AirPlane implements IMilitary{
 		this.hasArmament = hasArmament;		
 	}
 
+	
+	/**
+	 * This method differentiates military from civil aircrafts
+	 */
 	@Override
 	public boolean hasArmament() {
 		return this.hasArmament;

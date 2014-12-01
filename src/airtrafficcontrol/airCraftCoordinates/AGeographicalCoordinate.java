@@ -4,7 +4,7 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
 /**
- * 
+ * This class defines a geographical coordinate, as an abstract entity
  *
  * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
@@ -15,7 +15,8 @@ public abstract class AGeographicalCoordinate
 
 	
 	/**
-	 * 
+	 * This constructor defines the features of the geographical coordinate, and if it isn't well defined
+	 * it throws an IO exception.
 	 * @param geographicalCoordinate
 	 * @param max
 	 * @param min
@@ -30,7 +31,8 @@ public abstract class AGeographicalCoordinate
 	}
 	
 	/**
-	 * 
+	 * This method verifies if the geographical coordinate is well defined, if not, it throws an
+	 * IO exception
 	 * @param geographicalCoordinate
 	 * @param min
 	 * @throws InvalidArgumentException

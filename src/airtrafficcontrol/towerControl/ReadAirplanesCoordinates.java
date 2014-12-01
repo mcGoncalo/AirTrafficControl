@@ -19,6 +19,7 @@ import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
  * @author Eva Gomes
  * @author Hugo Leal
  * @author Lucas Andrade
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 
 public class ReadAirplanesCoordinates

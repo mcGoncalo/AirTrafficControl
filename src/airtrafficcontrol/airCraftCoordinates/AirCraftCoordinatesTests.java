@@ -8,10 +8,19 @@ import org.junit.Test;
 
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+
+/**
+ * This tests verifies if the class AirCraftCoordinates is well defined
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
+ */
 public class AirCraftCoordinatesTests
 {
 	private GeographicalPosition gPosition;
 	
+	
+	/**
+	 * This method will be run before any test in the class.
+	 */
 	@Before
 	public void before()
 	{
@@ -29,6 +38,10 @@ public class AirCraftCoordinatesTests
 			e.printStackTrace();
 		}
 	}
+	
+	/**
+	 * This is the test to the method that we want to verify
+	 */
 	@Test
 	public void test()
 	{	

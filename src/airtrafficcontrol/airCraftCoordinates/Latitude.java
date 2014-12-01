@@ -6,6 +6,7 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
  * Class whose instances represent a latitude value.
+ * @author (Revisão) Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
   */
 public class Latitude extends AGeographicalCoordinate
 {
