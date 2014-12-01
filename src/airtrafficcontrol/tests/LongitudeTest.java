@@ -9,72 +9,15 @@ import airtrafficcontrol.airCraftCoordinates.Longitude;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 public class LongitudeTest {
-	
-	Longitude _lon;
-
-	@Before
-	public void newLongitudeValue() throws InvalidArgumentException 
-	{
-		_lon = new Longitude(60.00);
-	}
 
 	
 	@Test 
-	public void shouldReturnLongitudeValue()
+	public void shouldReturnLongitudeValue() throws InvalidArgumentException 
 	{
-		assertTrue(60.00 == _lon.getLongitudeValue());
+		Longitude _lon = new Longitude(60.00);
+		
+		assertTrue(60.00 == _lon.getGeographicalCoordinate());
 	}
 	
-	@Test 
-	public void shouldIncrementLongitudeWithDoubleValue()
-	{
-		//Arrange
-		double lon = 10.00;
-		
-		//Act
-		_lon.incrementLongitude(lon);
-		
-		//Assert
-		assertTrue(70.00 == _lon.getLongitudeValue());
-	}
 	
-	@Test 
-	public void shouldIncrementLongitudeWithAnLongitudeObject() throws InvalidArgumentException
-	{
-		//Arrange
-		Longitude lon = new Longitude(10.00);
-		
-		//Act
-		_lon.incrementLongitude(lon);
-		
-		//Assert
-		assertTrue(70.00 == _lon.getLongitudeValue());
-	}
-	
-	@Test 
-	public void shouldSetLongitudeValueWithADoubleValue() throws InvalidArgumentException
-	{
-		//Arrange
-		double lon = 10.00;
-		
-		//Act
-		_lon.setLongitude(lon);
-		
-		//Assert
-		assertTrue(10.00 == _lon.getLongitudeValue());
-	}
-	
-	@Test 
-	public void shouldSetLongitudeWithAnLongitudeObject() throws InvalidArgumentException
-	{
-		//Arrange
-		Longitude lon = new Longitude(10.00);
-		
-		//Act
-		_lon.setLongitude(lon);
-		
-		//Assert
-		assertTrue(10.00 == _lon.getLongitudeValue());
-	}
-
 }

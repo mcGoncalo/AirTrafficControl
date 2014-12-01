@@ -16,10 +16,11 @@ import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Transport;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.AirPlane;
-import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.CargoAircraft;
+import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.MilitaryAirPlane;
+import airtrafficcontrol.hangar.MilitaryHelicopter;
 import airtrafficcontrol.towerControl.Database;
 import airtrafficcontrol.towerControl.ReportGenerator;
 
@@ -29,10 +30,10 @@ public class ReportEmitterTest {
 	Database data;
 	AirPlane airl1;
 	AirPlane airl2;
-	Transport transp;
-	CargoAircraft carg;
+	MilitaryHelicopter transp;
+	MilitaryAirPlane carg;
 	FlightPlan plan;
-	Map<String, Airship> dataMap;
+	Map<String, AirCraft> dataMap;
 	String source = "newCoordinatesTest.txt";
 	
 	@Before
@@ -45,20 +46,20 @@ public class ReportEmitterTest {
 		date2.add(12, 10);
 		
 		AltitudeCorridor corr = new AltitudeCorridor(10000, 12000);
-		plan = new FlightPlan(date1, date2);
+		plan = new FlightPlan(date1, date2,9,9,6);
 		plan.addEvent(new AirCorridorInTime(date1, date2, corr));
 		
-		airl1 = new AirPlane("mh237", new GeographicalPosition(0,0,100), plan, 0);
-		airl2 = new AirPlane("fw321", new GeographicalPosition(0,0,100), plan, 200);
-		transp = new Transport("3456", new GeographicalPosition(0,0,50), plan, false);
-		carg = new CargoAircraft("2345", new GeographicalPosition(0,0,100), plan);
+		airl1 = new CivilAirPlane("mh237", new GeographicalPosition(0,0,100), plan, 0);
+		airl2 = new CivilAirPlane("fw321", new GeographicalPosition(0,0,100), plan, 200);
+		transp = new MilitaryHelicopter("3456", new GeographicalPosition(0,0,50), plan, false);
+		carg = new MilitaryAirPlane("2345", new GeographicalPosition(0,0,100), plan, true);
 		
 		data = new Database();
 		
-		data.addAirplane(airl1);
-		data.addAirplane(airl2);
-		data.addAirplane(transp);
-		data.addAirplane(carg);
+		data.addAirship(airl1);
+		data.addAirship(airl2);
+		data.addAirship(transp);
+		data.addAirship(carg);
 		
 		dataMap = data.getDatabase();
 	}

@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
+
+
 /**
  * Abstract class that represents an AirCraft with a position and a ID
  *
@@ -72,8 +74,6 @@ public abstract class AirCraft
 	{
 		return lastKnownGeograficalPositions.toArray();
 	}
-	
-
 	
 	/**
 	 * @param newGeographicalPosition

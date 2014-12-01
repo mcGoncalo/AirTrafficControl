@@ -1,6 +1,5 @@
 package airtrafficcontrol.hangar;
 
-import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
@@ -9,15 +8,14 @@ public class CivilAirPlane extends AirPlane implements ICivil
 {
 	private int passengersNum;
 	
-
-	
-	public CivilAirPlane(String flightID, GeographicalPosition statingPosition,
-			FlightPlan flightPlan, boolean hasCargo, int passengers)
-			throws InvalidArgumentException
+	public CivilAirPlane( 	String flightID,
+							GeographicalPosition statingPosition,
+							FlightPlan flightPlan,
+							int passengers
+						) throws InvalidArgumentException
 	{
-		super(flightID, statingPosition, flightPlan, hasCargo);
+		super(flightID, statingPosition, flightPlan );
 		this.passengersNum = passengers;
-	
 	}
 	
 	/**
@@ -109,6 +107,4 @@ public class CivilAirPlane extends AirPlane implements ICivil
 		super.getPlan().setNumberOfMinutesToSwitchCorridor(newTime);
 	}
 
-	
-	
 }

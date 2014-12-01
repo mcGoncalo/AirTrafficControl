@@ -5,6 +5,8 @@ import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
+
+
 /**
  * 
  * class of civil aircraft used to transport cargo

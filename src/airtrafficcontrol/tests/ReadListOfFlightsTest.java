@@ -10,15 +10,15 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-import airtrafficcontrol.AirShipPlan.AltitudeCorridor;
 import airtrafficcontrol.AirShipPlan.FlightPlan;
 import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
-import airtrafficcontrol.app.utils.Transport;
-import airtrafficcontrol.hangar.AirPlane;
+import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.PrivateJet;
+import airtrafficcontrol.hangar.CivilAirPlane;
+import airtrafficcontrol.hangar.CivilHelicopter;
+import airtrafficcontrol.hangar.MilitaryHelicopter;
 import airtrafficcontrol.towerControl.Database;
 import airtrafficcontrol.towerControl.ReadListOfFlights;
 
@@ -26,7 +26,7 @@ public class ReadListOfFlightsTest {
 
 	ReadListOfFlights reader;
 	Database database;
-	Map<String, Airship> data;
+	Map<String, AirCraft> data;
 	
 	@Before
 	public void buildTheDatabase() throws IOException, InvalidFlightIDException, InvalidArgumentException {
@@ -44,18 +44,18 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldHaveTheRightTypeOfAirplanes()
 	{
-		assertTrue(data.get("xptofligth01") instanceof airtrafficcontrol.app.utils.Transport);
+		assertTrue(data.get("xptofligth01") instanceof airtrafficcontrol.hangar.MilitaryHelicopter);
 		assertTrue(data.get("xptofligth02") instanceof airtrafficcontrol.hangar.AirPlane);
 		assertTrue(data.get("xptofligth03") instanceof airtrafficcontrol.hangar.AirPlane);
-		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.hangar.PrivateJet);
-		assertTrue(data.get("xptofligth05") instanceof airtrafficcontrol.hangar.CargoAircraft);
-		assertTrue(data.get("xptofligth06") instanceof airtrafficcontrol.hangar.CargoAircraft);
+		assertTrue(data.get("xptofligth04") instanceof airtrafficcontrol.hangar.CivilAirPlane);
+		assertTrue(data.get("xptofligth05") instanceof airtrafficcontrol.hangar.MilitaryAirPlane);
+		assertTrue(data.get("xptofligth06") instanceof airtrafficcontrol.hangar.MilitaryAirPlane);
 	}
 	
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf1()
 	{
-		Airship transport = data.get("xptofligth01");
+		Airship transport = (Airship) data.get("xptofligth01");
 		
 		Calendar takeOff = transport.getTakeOffDate();
 		Calendar landing = transport.getLandingDate();
@@ -76,7 +76,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf2()
 	{
-		Airship airliner = data.get("xptofligth02");
+		Airship airliner = (Airship) data.get("xptofligth02");
 		
 		Calendar takeOff = airliner.getTakeOffDate();
 		Calendar landing = airliner.getLandingDate();
@@ -97,7 +97,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf3()
 	{
-		Airship airliner = data.get("xptofligth03");
+		Airship airliner = (Airship) data.get("xptofligth03");
 		
 		Calendar takeOff = airliner.getTakeOffDate();
 		Calendar landing = airliner.getLandingDate();
@@ -118,10 +118,10 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf4()
 	{
-		Airship jet = data.get("xptofligth04");
+		Airship cHeli =  (Airship) data.get("xptofligth04");
 		
-		Calendar takeOff = jet.getTakeOffDate();
-		Calendar landing = jet.getLandingDate();
+		Calendar takeOff = cHeli.getTakeOffDate();
+		Calendar landing = cHeli.getLandingDate();
 		
 		assertEquals(2014, takeOff.get(Calendar.YEAR));
 		assertEquals(11 - 1, takeOff.get(Calendar.MONTH));
@@ -139,10 +139,10 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf5()
 	{
-		Airship cargo = data.get("xptofligth05");
+		Airship mAirplaine = (Airship) data.get("xptofligth05");
 		
-		Calendar takeOff = cargo.getTakeOffDate();
-		Calendar landing = cargo.getLandingDate();
+		Calendar takeOff = mAirplaine.getTakeOffDate();
+		Calendar landing = mAirplaine.getLandingDate();
 		
 		assertEquals(2014, takeOff.get(Calendar.YEAR));
 		assertEquals(11 - 1, takeOff.get(Calendar.MONTH));
@@ -160,10 +160,10 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightDatesOfLandingAndTakeOffOf6()
 	{
-		Airship cargo = data.get("xptofligth06");
+		Airship mAirplaine1 = (Airship) data.get("xptofligth06");
 		
-		Calendar takeOff = cargo.getTakeOffDate();
-		Calendar landing = cargo.getLandingDate();
+		Calendar takeOff = mAirplaine1.getTakeOffDate();
+		Calendar landing = mAirplaine1.getLandingDate();
 		
 		assertEquals(2014, takeOff.get(Calendar.YEAR));
 		assertEquals(11 - 1, takeOff.get(Calendar.MONTH));
@@ -181,8 +181,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf1()
 	{
-		Airship transport = data.get("xptofligth01");
-		GeographicalPosition pos = transport.getGeographicPosition();
+		AirCraft mHeli = data.get("xptofligth01");
+		GeographicalPosition pos = mHeli.getGeographicPosition();
 		
 		assertEquals(39.3, pos.getLatitude(), 0.01);
 		assertEquals(8, pos.getLongitude(), 0.01);
@@ -192,7 +192,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf2()
 	{
-		Airship airliner = data.get("xptofligth02");
+		AirCraft airliner = data.get("xptofligth02");
 		GeographicalPosition pos = airliner.getGeographicPosition();
 		
 		assertEquals(-39.3, pos.getLatitude(), 0.01);
@@ -203,7 +203,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf3()
 	{
-		Airship airliner = data.get("xptofligth03");
+		AirCraft airliner = data.get("xptofligth03");
 		GeographicalPosition pos = airliner.getGeographicPosition();
 		
 		assertEquals(52.89, pos.getLatitude(), 0.01);
@@ -214,8 +214,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf4()
 	{
-		Airship jet = data.get("xptofligth04");
-		GeographicalPosition pos = jet.getGeographicPosition();
+		AirCraft cHeli = data.get("xptofligth04");
+		GeographicalPosition pos = cHeli.getGeographicPosition();
 		
 		assertEquals(0.3, pos.getLatitude(), 0.01);
 		assertEquals(45.04, pos.getLongitude(), 0.01);
@@ -225,8 +225,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf5()
 	{
-		Airship cargo = data.get("xptofligth05");
-		GeographicalPosition pos = cargo.getGeographicPosition();
+		AirCraft militaryPlane = data.get("xptofligth05");
+		GeographicalPosition pos = militaryPlane.getGeographicPosition();
 		
 		assertEquals(-67.39, pos.getLatitude(), 0.01);
 		assertEquals(-10, pos.getLongitude(), 0.01);
@@ -236,7 +236,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheCorrectTakeOffCoordinatesOf6()
 	{
-		Airship cargo = data.get("xptofligth06");
+		AirCraft cargo = data.get("xptofligth06");
 		GeographicalPosition pos = cargo.getGeographicPosition();
 		
 		assertEquals(17.33, pos.getLatitude(), 0.01);
@@ -247,28 +247,28 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTrueBecauseTheFirstAirplaneHasArmament()
 	{
-		assertTrue(((Transport)data.get("xptofligth01")).hasArmament());
+		assertTrue(((MilitaryHelicopter) data.get("xptofligth01")).hasArmament());
 	}
 	
 	@Test
 	public void shouldReturnTheRightNumberOfPassengers()
 	{
-		assertEquals(203, ((AirPlane)data.get("xptofligth02")).getPassengersNumber());
-		assertEquals(0, ((AirPlane)data.get("xptofligth03")).getPassengersNumber());
-		assertEquals(24, ((PrivateJet)data.get("xptofligth04")).getPassengersNumber());
+		assertEquals(203, ((CivilAirPlane)data.get("xptofligth02")).getPassengersNumber());
+		assertEquals(0, ((CivilAirPlane)data.get("xptofligth03")).getPassengersNumber());
+		assertEquals(24, ((CivilHelicopter) data.get("xptofligth04")).getPassengersNumber());
 	}
 	
 	@Test 
 	public void shouldReturnTheObservationThatTheAirplaneHasAlreadyLanded() throws InvalidArgumentException
 	{
-		assertEquals("The airplane has already landed.", data.get("xptofligth01").getObservations());
+		assertEquals("The airplane has already landed.", ((Airship) data.get("xptofligth01")).getObservations());
 	}
 	
 	@Test
 	public void shouldReturnTheRightCorridorFor1() throws InvalidArgumentException
 	{
-		Airship transport = data.get("xptofligth01");
-		FlightPlan plan = transport.getPlan();
+		Airship mHeli = (Airship) data.get("xptofligth01");
+		FlightPlan plan = mHeli.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 9, 25)));
 		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 10, 30)).getUpperLimit(), 0.01);
@@ -282,7 +282,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightCorridorFor2() throws InvalidArgumentException
 	{
-		Airship airliner = data.get("xptofligth02");
+		Airship airliner = (Airship) data.get("xptofligth02");
 		FlightPlan plan = airliner.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 11, 4)));
@@ -300,7 +300,7 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightCorridorFor3() throws InvalidArgumentException
 	{
-		Airship airliner = data.get("xptofligth03");
+		Airship airliner = (Airship) data.get("xptofligth03");
 		FlightPlan plan = airliner.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 14, 58)));
@@ -315,8 +315,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightCorridorFor4() throws InvalidArgumentException
 	{
-		Airship jet = data.get("xptofligth04");
-		FlightPlan plan = jet.getPlan();
+		Airship cHeli = (Airship) data.get("xptofligth04");
+		FlightPlan plan = cHeli.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 20, 35)));
 		assertEquals(11000, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 23, 59)).getUpperLimit(), 0.01);
@@ -330,8 +330,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightCorridorFor5() throws InvalidArgumentException
 	{
-		Airship cargo = data.get("xptofligth05");
-		FlightPlan plan = cargo.getPlan();
+		Airship militaryPlane = (Airship) data.get("xptofligth05");
+		FlightPlan plan = militaryPlane.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 21, 39)));
 		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 6, 23, 56)).getUpperLimit(), 0.01);
@@ -345,8 +345,8 @@ public class ReadListOfFlightsTest {
 	@Test
 	public void shouldReturnTheRightCorridorFor6() throws InvalidArgumentException
 	{
-		Airship cargo = data.get("xptofligth06");
-		FlightPlan plan = cargo.getPlan();
+		Airship militaryCargo = (Airship) data.get("xptofligth06");
+		FlightPlan plan = militaryCargo.getPlan();
 		
 		assertEquals(null, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 0, 1)));
 		assertEquals(11500, plan.getCorridorAtTime(new GregorianCalendar(2014, 10, 7, 2, 0)).getUpperLimit(), 0.01);

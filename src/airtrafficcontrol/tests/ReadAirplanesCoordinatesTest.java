@@ -17,7 +17,6 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
 import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.AirPlane;
-import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.MilitaryAirPlane;
 import airtrafficcontrol.towerControl.Database;

@@ -18,11 +18,10 @@ import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.app.exceptions.InvalidFlightIDException;
 import airtrafficcontrol.hangar.AirCraft;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.Airship;
 import airtrafficcontrol.hangar.CivilAirPlane;
 import airtrafficcontrol.hangar.CivilHelicopter;
-import airtrafficcontrol.hangar.MilitarHelicopter;
 import airtrafficcontrol.hangar.MilitaryAirPlane;
+import airtrafficcontrol.hangar.MilitaryHelicopter;
 import airtrafficcontrol.hangar.OVNI;
 
 
@@ -49,7 +48,7 @@ public class ReadListOfFlights
 					new FlightPlan(
 							new GregorianCalendar( 2014, 11, 10, 00, 15 ),
 							new GregorianCalendar( 2014, 11, 10, 04, 15 ) , 8, 10, 4), 50 );
-			airship2 = new MilitarHelicopter( "xpto02", new GeographicalPosition( 30,
+			airship2 = new MilitaryHelicopter( "xpto02", new GeographicalPosition( 30,
 					30, 0 ),
 					new FlightPlan(
 							new GregorianCalendar( 2014, 11, 11, 00, 15 ),
@@ -219,7 +218,7 @@ public class ReadListOfFlights
 							airship4.getPlan().getNumberOfMinutesToLand(),
 							airship4.getPlan().getNumberOfMinutesToSwitchCorridor() );
 					
-					MilitarHelicopter t = new MilitarHelicopter( flightID, pos, plan,(armament1 == 0) ? false : true );
+					MilitaryHelicopter t = new MilitaryHelicopter( flightID, pos, plan,(armament1 == 0) ? false : true );
 					database.addAirship( t );
 					break;
 					

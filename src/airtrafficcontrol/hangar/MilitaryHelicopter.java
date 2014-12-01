@@ -5,6 +5,8 @@ import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 
+
+
 /**
  * 
  * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira

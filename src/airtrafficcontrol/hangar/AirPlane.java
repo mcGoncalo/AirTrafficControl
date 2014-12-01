@@ -5,12 +5,9 @@ import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 
 /**
- * Creates an airliner
- * 
+ * Abstract class that represents an Aisplane with a position, an ID and a corridor
  *
- *@author Eva Gomes
- *@author Hugo Leal
- *@author Lucas Andrade
+ * @author Filipa Estiveira, Filipa Gonçalves, Gonçalo Carvalho, José Oliveira
  */
 public abstract class AirPlane extends Airship
 {

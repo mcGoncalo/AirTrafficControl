@@ -15,7 +15,7 @@ import airtrafficcontrol.airCraftCoordinates.GeographicalPosition;
 import airtrafficcontrol.app.exceptions.InvalidArgumentException;
 import airtrafficcontrol.hangar.AirPlane;
 import airtrafficcontrol.hangar.Airship;
-import airtrafficcontrol.hangar.MilitaryHelicopter;
+import airtrafficcontrol.hangar.MilitaryAirPlane;
 import airtrafficcontrol.towerControl.ReadListOfFlights;
 
 
@@ -47,7 +47,7 @@ public class AirplaneTest_UsingMilitaryAirplaneInstance {
 		int MinutesToSwitchCorridor = 10;
 		
 		geo = new GeographicalPosition(initialLatitude, initialLongitude, initialAtltitude);
-		airplane = new MilitaryHelicopter("rj351", geo, new FlightPlan(date1, date2,
+		airplane = new MilitaryAirPlane("rj351", geo, new FlightPlan(date1, date2,
 				MinutesToTakeOff, MinutesToLand,MinutesToSwitchCorridor), true);
 	}
 	
@@ -177,7 +177,7 @@ public class AirplaneTest_UsingMilitaryAirplaneInstance {
 		Calendar hourLand = new GregorianCalendar();
 		hourLand.add(12, 20);
 		
-		AirPlane airliner3 = new MilitaryHelicopter("rj351", geo, new FlightPlan(hourTakeOff, hourLand, 4,7,2), true);
+		AirPlane airliner3 = new MilitaryAirPlane("rj351", geo, new FlightPlan(hourTakeOff, hourLand, 4,7,2), true);
 		assertEquals(hourTakeOff, airliner3.getTakeOffDate());
 	}
 	
@@ -189,7 +189,7 @@ public class AirplaneTest_UsingMilitaryAirplaneInstance {
 		Calendar hourLand = new GregorianCalendar();
 		hourLand.add(12, 20);
 		
-		AirPlane airliner4 = new MilitaryHelicopter("rj351", geo, new FlightPlan(hourTakeOff, hourLand, 10, 12, 5), false);
+		AirPlane airliner4 = new MilitaryAirPlane("rj351", geo, new FlightPlan(hourTakeOff, hourLand, 10, 12, 5), false);
 		assertEquals(hourLand, airliner4.getLandingDate());
 	}
 	
@@ -204,7 +204,7 @@ public class AirplaneTest_UsingMilitaryAirplaneInstance {
 
 
 	
-	private static MilitaryHelicopter makeAnAirplaneWithAPlan(int diff) throws InvalidArgumentException
+	private static MilitaryAirPlane makeAnAirplaneWithAPlan(int diff) throws InvalidArgumentException
 	{
 		Calendar hourDep = new GregorianCalendar();
 		Calendar hourLand = new GregorianCalendar();
@@ -230,7 +230,7 @@ public class AirplaneTest_UsingMilitaryAirplaneInstance {
 		plan.addEvent(corridor);
 		plan.addEvent(landing);
 		
-		return new MilitaryHelicopter("id123", geo, plan, false);
+		return new MilitaryAirPlane("id123", geo, plan, false);
 	}
 
 }
